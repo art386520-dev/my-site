@@ -75,6 +75,9 @@
     .panel{background:#fff;border-radius:12px;max-width:920px;width:95%;padding:12px;overflow:auto}
     .light-img{width:100%;height:auto;border-radius:8px}
     .back-btn{background:rgba(0,0,0,0.06);padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
+    .lang-switch{display:flex;gap:8px;align-items:center}
+    .lang-btn{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#fff;padding:6px 8px;border-radius:8px;cursor:pointer;font-weight:700}
+    .lang-btn.active{background:#fff;color:var(--primary)}
     @media (max-width:1100px){
       .hero{grid-template-columns:1fr;gap:18px;padding:42px 18px}
       .carousel{gap:8px}
@@ -121,7 +124,7 @@ html, body { -webkit-text-size-adjust:100%; }
 
 .project img, .card img { width:100%; height:auto; object-fit:cover; }
 
-  </style>
+</style>
 </head>
 <body>
 
@@ -130,37 +133,45 @@ html, body { -webkit-text-size-adjust:100%; }
       <div class="brand">
         <div class="logo" aria-hidden="true">Շ</div>
         <div>
-          <div style="font-weight:800">Շինարարություն</div>
-          <div style="font-size:12px;opacity:.95">Շինարարություն և ճարտարապետություն</div>
+          <div style="font-weight:800" data-i18n="brand.name">Շինարարություն</div>
+          <div style="font-size:12px;opacity:.95" data-i18n="brand.tagline">Շինարարություն և ճարտարապետություն</div>
         </div>
       </div>
 
       <nav class="primary" id="primaryNav" aria-label="Main">
-        <a href="/" data-page="home">Գլխավոր էջ</a>
-        <a href="/services" data-page="services">Ծառայություններ</a>
-        <a href="/projects" data-page="projects">Նախագծեր</a>
-        <a href="/about" data-page="about">Մեր մասին</a>
-        <a href="/contact" data-page="contact">Կապ</a>
-        <a href="/reviews" data-page="reviews">Կարծիքներ</a>
+        <a href="/" data-page="home" data-i18n="nav.home">Գլխավոր էջ</a>
+        <a href="/services" data-page="services" data-i18n="nav.services">Ծառայություններ</a>
+        <a href="/projects" data-page="projects" data-i18n="nav.projects">Նախագծեր</a>
+        <a href="/about" data-page="about" data-i18n="nav.about">Մեր մասին</a>
+        <a href="/contact" data-page="contact" data-i18n="nav.contact">Կապ</a>
+        <a href="/reviews" data-page="reviews" data-i18n="nav.reviews">Կարծիքներ</a>
       </nav>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="lang-switch" role="navigation" aria-label="Language switch">
+          <button class="lang-btn" data-lang="hy" aria-pressed="false">HY</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-btn" data-lang="ru" aria-pressed="false">RU</button>
+        </div>
+      </div>
     </div>
 
     <div class="menu-panel" id="menuPanel" aria-hidden="true">
       <div class="menu-grid">
-        <a class="menu-item" href="/services#design" data-page="services">Դիզայն և BIM Բնակելի</a>
-        <a class="menu-item" href="/projects#residential" data-page="projects">Բնակելի տներ</a>
-        <a class="menu-item" href="/projects#commercial" data-page="projects">Առևտրային</a>
-        <a class="menu-item" href="/about#team" data-page="about">Թիմ</a>
+        <a class="menu-item" href="/services#design" data-page="services" data-i18n="menu.design">Դիզայն և BIM Բնակելի</a>
+        <a class="menu-item" href="/projects#residential" data-page="projects" data-i18n="menu.residential">Բնակելի տներ</a>
+        <a class="menu-item" href="/projects#commercial" data-page="projects" data-i18n="menu.commercial">Առևտրային</a>
+        <a class="menu-item" href="/about#team" data-page="about" data-i18n="menu.team">Թիմ</a>
 
-        <a class="menu-item" href="/services#construction" data-page="services">Շինարարություն</a>
-        <a class="menu-item" href="/projects#beforeafter" data-page="projects">Մինչև/Հետո</a>
-        <a class="menu-item" href="/about#certs" data-page="about">Վկայականներ</a>
-        <a class="menu-item" href="/contact" data-page="contact">Կապ վաճառքի բաժնի հետ</a>
+        <a class="menu-item" href="/services#construction" data-page="services" data-i18n="menu.construction">Շինարարություն</a>
+        <a class="menu-item" href="/projects#beforeafter" data-page="projects" data-i18n="menu.beforeafter">Մինչև/Հետո</a>
+        <a class="menu-item" href="/about#certs" data-page="about" data-i18n="menu.certs">Վկայականներ</a>
+        <a class="menu-item" href="/contact" data-page="contact" data-i18n="menu.contact">Կապ վաճառքի բաժնի հետ</a>
 
-        <a class="menu-item" href="/services#maintenance" data-page="services">Ծառայություն</a>
-        <a class="menu-item" href="/projects#infra" data-page="projects">Ենթակառուցվածք</a>
-        <a class="menu-item" href="/about#values" data-page="about">Արժեքներ</a>
-        <a class="menu-item" href="/reviews" data-page="reviews">Հաճախորդների կարծիքներ</a>
+        <a class="menu-item" href="/services#maintenance" data-page="services" data-i18n="menu.maintenance">Ծառայություն</a>
+        <a class="menu-item" href="/projects#infra" data-page="projects" data-i18n="menu.infra">Ենթակառուցվածք</a>
+        <a class="menu-item" href="/about#values" data-page="about" data-i18n="menu.values">Արժեքներ</a>
+        <a class="menu-item" href="/reviews" data-page="reviews" data-i18n="menu.reviews">Հաճախորդների կարծիքներ</a>
       </div>
     </div>
   </div>
@@ -173,33 +184,33 @@ html, body { -webkit-text-size-adjust:100%; }
     <section id="page-home" class="page active" role="main" aria-labelledby="homeTitle">
       <div class="hero">
         <div class="left container">
-          <span class="kicker">Շինարարական լուծումներ</span>
-          <h1 id="homeTitle">Կառուցենք Ձեր ապագան — ժամանակին և որակով</h1>
-          <p class="lead">Մեկ թիմ՝ ամբողջական ծառայություններով՝ նախագծումից մինչև հանձնում․ նոր ժամանակների որակ, անվտանգություն և երաշխիք։</p>
+          <span class="kicker" data-i18n="home.kicker">Շինարարական լուծումներ</span>
+          <h1 id="homeTitle" data-i18n="home.title">Կառուցենք Ձեր ապագան — ժամանակին և որակով</h1>
+          <p class="lead" data-i18n="home.lead">Մեկ թիմ՝ ամբողջական ծառայություններով՝ նախագծումից մինչև հանձնում․ նոր ժամանակների որակ, անվտանգություն և երաշխիք։</p>
 
           <div class="carousel-wrap" aria-label="Showcase">
             <div id="carousel" class="carousel" tabindex="0" title="Slides (hover to pause)"></div>
             <div class="carousel-controls">
-              <button class="ctrl" id="prevSlide">Նախորդ</button>
-              <button class="ctrl" id="nextSlide">Հաջորդ</button>
+              <button class="ctrl" id="prevSlide" data-i18n="carousel.prev">Նախորդ</button>
+              <button class="ctrl" id="nextSlide" data-i18n="carousel.next">Հաջորդ</button>
             </div>
           </div>
         </div>
 
         <aside class="right container card">
-          <div style="font-weight:800">Անմիջական հաշվիչ</div>
+          <div style="font-weight:800; color: black" data-i18n="calc.title">Անմիջական հաշվիչ</div>
           <form id="quickCalc" style="margin-top:12px" onsubmit="return false">
-            <input id="area" type="number" placeholder="մ²" />
+            <input id="area" type="number" data-i18n-placeholder="calc.area" placeholder="մ²" />
             <select id="serviceType" style="margin-top:8px">
-              <option value="build">Ընդհանուր շինարարություն</option>
-              <option value="reno">Վերանորոգում</option>
-              <option value="full">Նախագիծ + իրականացում</option>
+              <option value="build" data-i18n-option="service.build">Ընդհանուր շինարարություն</option>
+              <option value="reno" data-i18n-option="service.reno">Վերանորոգում</option>
+              <option value="full" data-i18n-option="service.full">Նախագիծ + իրականացում</option>
             </select>
             <div style="display:flex;gap:8px;margin-top:10px">
-              <button id="calcBtn" class="btn-quote" style="flex:1">Հաշվել</button>
-              <button id="openContactFromCalc" type="button" style="flex:1;border-radius:8px;background:#fff;color:var(--primary);border:1px solid #eef2f7">Մանրամասն</button>
+              <button id="calcBtn" class="btn-quote" style="flex:1" data-i18n="calc.button">Հաշվել</button>
+              <button id="openContactFromCalc" type="button" style="flex:1;border-radius:8px;background:#fff;color:var(--primary);border:1px solid #eef2f7" data-i18n="calc.details">Մանրամասն</button>
             </div>
-            <div id="calcResult" class="small" style="margin-top:10px; color: black">Ընդհանուր արժեք՝ <strong id="calcVal">—</strong></div>
+            <div id="calcResult" class="small" style="margin-top:10px; color: black" data-i18n="calc.result">Ընդհանուր արժեք՝ <strong id="calcVal">—</strong></div>
           </form>
         </aside>
       </div>
@@ -207,22 +218,22 @@ html, body { -webkit-text-size-adjust:100%; }
 
     <section id="page-services" class="page" role="region" aria-labelledby="servicesTitle">
       <div class="container">
-        <button class="back-btn" id="backFromServices">← Հետ վերադառնալ</button>
-        <h2 id="servicesTitle" style="margin-top:12px;font-weight:800">Services — Our Capabilities</h2>
-        <p class="muted">Մենք ծառայություններ ենք տրամադրում ամբողջական սպեկտրում։</p>
+        <button class="back-btn" id="backFromServices" data-i18n="back">← Հետ վերադառնալ</button>
+        <h2 id="servicesTitle" style="margin-top:12px;font-weight:800" data-i18n="services.title">Services — Our Capabilities</h2>
+        <p class="muted" data-i18n="services.lead">Մենք ծառայություններ ենք տրամադրում ամբողջական սպեկտրում։</p>
 
         <div class="services" style="margin-top:18px">
           <article class="service" data-media='{"type":"image","src":"https://images.unsplash.com/photo-1505842465776-3a45a2b6b4b9?w=1600&q=80&auto=format&fit=crop","title":"Design"}'>
-            <h3 style="margin:0 0 6px;font-weight:800">Design & BIM</h3>
-            <p class="muted">2D/3D Design, BIM, structural engineering and energy optimization.</p>
+            <h3 style="margin:0 0 6px;font-weight:800" data-i18n="service.design.title">Design & BIM</h3>
+            <p class="muted" data-i18n="service.design.desc">2D/3D Design, BIM, structural engineering and energy optimization.</p>
           </article>
           <article class="service" data-media='{"type":"video","src":"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4","poster":"https://images.unsplash.com/photo-1495502665773-8a8f0a20f6ad?w=900&q=60&auto=format&fit=crop","title":"Construction"}'>
-            <h3 style="margin:0 0 6px;font-weight:800">Construction</h3>
-            <p class="muted">From foundations to finishes — end-to-end construction with strict QC.</p>
+            <h3 style="margin:0 0 6px;font-weight:800" data-i18n="service.construction.title">Construction</h3>
+            <p class="muted" data-i18n="service.construction.desc">From foundations to finishes — end-to-end construction with strict QC.</p>
           </article>
           <article class="service" data-media='{"type":"text","title":"Maintenance","text":"Maintenance & 24/7 support — long-term partnerships."}'>
-            <h3 style="margin:0 0 6px;font-weight:800">Maintenance</h3>
-            <p class="muted">Post-handover maintenance, warranty & technical support.</p>
+            <h3 style="margin:0 0 6px;font-weight:800" data-i18n="service.maintenance.title">Maintenance</h3>
+            <p class="muted" data-i18n="service.maintenance.desc">Post-handover maintenance, warranty & technical support.</p>
           </article>
         </div>
       </div>
@@ -230,9 +241,9 @@ html, body { -webkit-text-size-adjust:100%; }
 
     <section id="page-projects" class="page" role="region" aria-labelledby="projectsTitle">
       <div class="container">
-        <button class="back-btn" id="backFromProjects">← Հետ վերադառնալ</button>
-        <h2 id="projectsTitle" style="margin-top:12px;font-weight:800">Projects — Case Studies</h2>
-        <p class="muted">Small selection of recent projects — click to open media & case details.</p>
+        <button class="back-btn" id="backFromProjects" data-i18n="back">← Հետ վերադallback</button>
+        <h2 id="projectsTitle" style="margin-top:12px;font-weight:800" data-i18n="projects.title">Projects — Case Studies</h2>
+        <p class="muted" data-i18n="projects.lead">Small selection of recent projects — click to open media & case details.</p>
 
         <div class="projects" style="margin-top:18px">
           <div class="project" data-src="https://images.unsplash.com/photo-1505842465776-3a45a2b6b4b9?w=1600&q=80&auto=format&fit=crop"><img loading="lazy" src="https://redgroup-public.s3.eu-central-1.amazonaws.com/developers/projects/366/photos/5-51Ke.jpg" alt="Residential"></div>
@@ -244,15 +255,15 @@ html, body { -webkit-text-size-adjust:100%; }
 
     <section id="page-about" class="page" role="region" aria-labelledby="aboutTitle">
       <div class="container">
-        <button class="back-btn" id="backFromAbout">← Հետ վերադառնալ</button>
-        <h2 id="aboutTitle" style="margin-top:12px;font-weight:800">About AutoBuild</h2>
-        <p class="muted">AutoBuild combines engineering rigor with construction excellence.</p>
+        <button class="back-btn" id="backFromAbout" data-i18n="back">← Հետ վերադառնալ</button>
+        <h2 id="aboutTitle" style="margin-top:12px;font-weight:800" data-i18n="about.title">About AutoBuild</h2>
+        <p class="muted" data-i18n="about.lead">AutoBuild combines engineering rigor with construction excellence.</p>
         <div style="display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:18px;align-items:start">
           <div>
-            <h3 style="font-weight:800">Our mission</h3>
-            <p class="muted">Delivering durable, efficient and safe buildings that stand the test of time.</p>
-            <h4 style="margin-top:18px;font-weight:800">Team</h4>
-            <p class="muted">Experienced engineers, project managers, and certified contractors.</p>
+            <h3 style="font-weight:800" data-i18n="about.mission.title">Our mission</h3>
+            <p class="muted" data-i18n="about.mission.desc">Delivering durable, efficient and safe buildings that stand the test of time.</p>
+            <h4 style="margin-top:18px;font-weight:800" data-i18n="about.team.title">Team</h4>
+            <p class="muted" data-i18n="about.team.desc">Experienced engineers, project managers, and certified contractors.</p>
           </div>
           <div class="card" style="overflow:hidden">
             <img src="https://www.ere.net/_next/image?url=https%3A%2F%2Fapi.eremedia.com%2Fwp-content%2Fuploads%2F2018%2F02%2Fteambuilding.jpg&w=3840&q=75" alt="team" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:8px" />
@@ -263,34 +274,34 @@ html, body { -webkit-text-size-adjust:100%; }
 
     <section id="page-contact" class="page" role="region" aria-labelledby="contactTitle">
       <div class="container">
-        <button class="back-btn" id="backFromContact">← Հետ վերադառանալ</button>
-        <h2 id="contactTitle" style="margin-top:12px;font-weight:800">Contact</h2>
-        <p class="muted">Fill the form and we'll reply with a tailored proposal.</p>
+        <button class="back-btn" id="backFromContact" data-i18n="back">← Հետ վերադառնալ</button>
+        <h2 id="contactTitle" style="margin-top:12px;font-weight:800" data-i18n="contact.title">Contact</h2>
+        <p class="muted" data-i18n="contact.lead">Fill the form and we'll reply with a tailored proposal.</p>
 
         <div class="contact-grid" style="margin-top:16px">
           <div>
-            <h3 style="font-weight:800">Office</h3>
-            <p class="muted">Address ·  info.adar.llc@gmail.com ·  · +374 98 841920</p>
+            <h3 style="font-weight:800" data-i18n="contact.office.title">Office</h3>
+            <p class="muted" data-i18n="contact.office.info">Address ·  info.adar.llc@gmail.com · Հեռախոսահամար · +374 98 841920</p>
             <div style="margin-top:12px">
-              <div class="small">Working hours</div>
-              <div class="muted">Mon–Fri: 9:00–18:00</div>
+              <div class="small" data-i18n="contact.hours.label">Working hours</div>
+              <div class="muted" data-i18n="contact.hours.value">Mon–Fri: 9:00–18:00</div>
             </div>
           </div>
 
           <aside class="card">
             <form id="contactForm" novalidate>
-              <label class="small">Անուն</label>
-              <input id="cfName" name="name" required placeholder="Name"/>
-              <label class="small">Էլ հասցե</label>
-              <input id="cfEmail" name="email" type="email" placeholder="example@mail.com"/>
-              <label class="small">Հեռախոսհամար</label>
-              <input id="cfPhone" name="phone" placeholder="+374 ..."/>
-              <label class="small">Նամակներ</label>
-              <textarea id="cfMsg" name="message" placeholder="Project details..."></textarea>
+              <label class="small" data-i18n="contact.form.name">Անուն</label>
+              <input id="cfName" name="name" required placeholder="Name" data-i18n-placeholder="contact.form.name.ph"/>
+              <label class="small" data-i18n="contact.form.email">Էլ հասցե</label>
+              <input id="cfEmail" name="email" type="email" placeholder="example@mail.com" data-i18n-placeholder="contact.form.email.ph"/>
+              <label class="small" data-i18n="contact.form.phone">Հեռախոսհամար</label>
+              <input id="cfPhone" name="phone" placeholder="+374 ..." data-i18n-placeholder="contact.form.phone.ph"/>
+              <label class="small" data-i18n="contact.form.msg">Նամակներ</label>
+              <textarea id="cfMsg" name="message" placeholder="Project details..." data-i18n-placeholder="contact.form.msg.ph"></textarea>
 
               <div style="display:flex;gap:8px;margin-top:10px">
-                <button id="cfSend" class="btn-quote" type="button">Ուղարկել</button>
-                <button id="cfReset" class="back-btn" type="button">Հետարկել</button>
+                <button id="cfSend" class="btn-quote" type="button" data-i18n="contact.form.send">Ուղարկել</button>
+                <button id="cfReset" class="back-btn" type="button" data-i18n="contact.form.reset">Հետարկել</button>
               </div>
               <div id="cfStatus" class="small" style="margin-top:8px;color:var(--muted)"></div>
             </form>
@@ -302,22 +313,22 @@ html, body { -webkit-text-size-adjust:100%; }
 
     <section id="page-reviews" class="page" role="region" aria-labelledby="reviewsTitle">
       <div class="container">
-        <button class="back-btn" id="backFromReviews">← Հետ վերադառնալ</button>
-        <h2 id="reviewsTitle" style="margin-top:12px;font-weight:800">Visitor Reviews</h2>
-        <p class="muted">Leave your rating and feedback — helps others choose the right partner.</p>
+        <button class="back-btn" id="backFromReviews" data-i18n="back">← Հետ վերադառնալ</button>
+        <h2 id="reviewsTitle" style="margin-top:12px;font-weight:800" data-i18n="reviews.title">Visitor Reviews</h2>
+        <p class="muted" data-i18n="reviews.lead">Leave your rating and feedback — helps others choose the right partner.</p>
 
         <div style="display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:18px">
           <div>
             <div style="margin-bottom:8px">
-              <strong>Average:</strong> <span id="avgRating">—</span> <small class="muted">(<span id="reviewsCount">0</span> reviews)</small>
+              <strong data-i18n="reviews.avg">Average:</strong> <span id="avgRating">—</span> <small class="muted">(<span id="reviewsCount">0</span> <span data-i18n="reviews.count">reviews</span>)</small>
             </div>
 
             <div id="reviewsList" style="display:grid;gap:12px"></div>
           </div>
 
           <aside class="card">
-            <h4 style="margin:0 0 8px;font-weight:800">Leave a review</h4>
-            <div class="small muted">Rate 1–5 stars and add a short comment.</div>
+            <h4 style="margin:0 0 8px;font-weight:800" data-i18n="reviews.form.title">Leave a review</h4>
+            <div class="small muted" data-i18n="reviews.form.lead">Rate 1–5 stars and add a short comment.</div>
 
             <div style="margin-top:12px">
               <div class="stars" id="starPicker" aria-label="Star rating">
@@ -327,11 +338,11 @@ html, body { -webkit-text-size-adjust:100%; }
                 <span class="star" data-value="4">★</span>
                 <span class="star" data-value="5">★</span>
               </div>
-              <input id="rvName" placeholder="Your name" style="margin-top:8px"/>
-              <textarea id="rvComment" placeholder="Your comment" style="margin-top:8px"></textarea>
+              <input id="rvName" placeholder="Your name" style="margin-top:8px" data-i18n-placeholder="reviews.form.name.ph"/>
+              <textarea id="rvComment" placeholder="Your comment" style="margin-top:8px" data-i18n-placeholder="reviews.form.comment.ph"></textarea>
               <div style="display:flex;gap:8px;margin-top:10px">
-                <button id="rvSend" class="btn-quote" type="button">Submit review</button>
-                <button id="rvClear" class="back-btn" type="button">Clear</button>
+                <button id="rvSend" class="btn-quote" type="button" data-i18n="reviews.form.send">Submit review</button>
+                <button id="rvClear" class="back-btn" type="button" data-i18n="reviews.form.clear">Clear</button>
               </div>
               <div id="rvStatus" class="small" style="margin-top:8px;color:var(--muted)"></div>
             </div>
@@ -345,8 +356,8 @@ html, body { -webkit-text-size-adjust:100%; }
   <footer>
     <div class="container">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-        <div class="small">© <strong>Շինարարություն</strong> – Բոլոր իրավունքները պաշտպանված են</div>
-        <div class="small muted">Էլ Հասցե · info.adar.llc@gmail.com · Հեռախոսահամար · +374 98 841920</div>
+        <div class="small" data-i18n="footer.copyright">© <strong>Շինարարություն</strong> – Բոլոր իրավունքները պաշտպանված են</div>
+        <div class="small muted" data-i18n="footer.contacts">Էլ Հասցե · info.adar.llc@gmail.com · Հեռախոսահամար · +374 98 841920</div>
       </div>
     </div>
   </footer>
@@ -364,65 +375,196 @@ html, body { -webkit-text-size-adjust:100%; }
 const API_ENDPOINT = ''; 
 const AUTO_PLAY_MS = 4000; 
 
-const pages = ['home','services','projects','about','contact','reviews'];
-function showPage(slug, push=true){
-  pages.forEach(p=> document.getElementById('page-' + p).classList.remove('active'));
-  const node = document.getElementById('page-' + slug);
-  if(!node) return;
-  node.classList.add('active');
-  document.title = `AutoBuild — ${slug.charAt(0).toUpperCase()+slug.slice(1)}`;
-  if(push) history.pushState({page:slug}, '', (slug==='home' ? '/' : '/' + slug));
-  window.scrollTo({top: document.querySelector('.hero-ghost') ? document.querySelector('.hero-ghost').offsetTop : 0, behavior:'smooth'});
+const availableLangs = ['hy','en','ru'];
+const defaultLang = 'hy';
+let currentLang = localStorage.getItem('autobuild_lang') || defaultLang;
+
+const i18n = {
+  hy: {
+    'brand.name':'Շինարարություն',
+    'brand.tagline':'Շինարարություն և ճարտարապետություն',
+    'nav.home':'Գլխավոր էջ','nav.services':'Ծառայություններ','nav.projects':'Նախագծեր','nav.about':'Մեր մասին','nav.contact':'Կապ','nav.reviews':'Կարծիքներ',
+    'menu.design':'Դիզայն և BIM Բնակելի','menu.residential':'Բնակելի տներ','menu.commercial':'Առևտրային','menu.team':'Թիմ','menu.construction':'Շինարարություն','menu.beforeafter':'Մինչև/Հետո','menu.certs':'Վկայականներ','menu.contact':'Կապ վաճառքի բաժնի հետ','menu.maintenance':'Ծառայություն','menu.infra':'Ենթակառուցվածք','menu.values':'Արժեքներ','menu.reviews':'Հաճախորդների կարծիքներ',
+    'home.kicker':'Շինարարական լուծումներ','home.title':'Կառուցենք Ձեր ապագան — ժամանակին և որակով','home.lead':'Մեկ թիմ՝ ամբողջական ծառայություններով՝ նախագծումից մինչև հանձնում․ նոր ժամանակների որակ, անվտանգություն և երաշխիք։',
+    'carousel.prev':'Նախորդ','carousel.next':'Հաջորդ',
+    'calc.title':'Անմիջական հաշվիչ','calc.area':'մ²','service.build':'Ընդհանուր շինարարություն','service.reno':'Վերանորոգում','service.full':'Նախագիծ + իրականացում','calc.button':'Հաշվել','calc.details':'Մանրամասն','calc.result':'Ընդհանուր արժեք՝',
+    'back':'← Հետ վերադառնալ',
+    'services.title':'Ծառայություններ — Մենք կարող ենք','services.lead':'Մենք ծառայություններ ենք տրամադրում ամբողջական սպեկտրում։',
+    'service.design.title':'Դիզայն ու BIM','service.design.desc':'2D/3D դեզայն, BIM և էներգետիկ օպտիմիզացում։',
+    'service.construction.title':'Շինարարություն','service.construction.desc':'Նետ մինչև ավարտ — ամբողջական շինարարություն և որակի վերահսկում։',
+    'service.maintenance.title':'Մխիթարում','service.maintenance.desc':'Վերահսկում և տեխնիկական աջակցություն։',
+    'projects.title':'Նախագծեր — Վիճակագրություն','projects.lead':'Վերջին նախագծերի ընտրանու ցուցադրում։',
+    'about.title':'Մեր մասին','about.lead':'AutoBuild միաձուլում է ճարտարագիտական խստությունը և շինարարական գերազանցությունը։',
+    'about.mission.title':'Մեր առաքելությունը','about.mission.desc':'Հետևողական, արդյունավետ և անվտանգ շենքեր։',
+    'about.team.title':'Դասակարգված թիմ','about.team.desc':'Ճանճված ինժեներներ և պրոֆեսիոնալներ։',
+    'contact.title':'Կապ','contact.lead':'Լրացրեք ձևը և մենք կպատասխանենք առաջարկով։',
+    'contact.office.title':'Գործասենյակ','contact.office.info':'Հասցե · info.adar.llc@gmail.com · +374 98 841920',
+    'contact.hours.label':'Աշխատանքային ժամեր','contact.hours.value':'Կիր–Ուրբ: 9:00–18:00',
+    'contact.form.name':'Անուն','contact.form.name.ph':'Անուն','contact.form.email':'Էլ. հասցե','contact.form.email.ph':'example@mail.com','contact.form.phone':'Հեռախոս','contact.form.phone.ph':'+374 ...','contact.form.msg':'Նամակ','contact.form.msg.ph':'Թողեք մանրամասները...',
+    'contact.form.send':'Ուղարկել','contact.form.reset':'Համարալաս',
+    'reviews.title':'Հաճախորդների կարծիքներ','reviews.lead':'Հատկացրեք վարկանիշ և մեկնաբանություն։',
+    'reviews.avg':'Միջին։','reviews.count':'կարծիք','reviews.form.title':'Թողնել կարծիք','reviews.form.lead':'Գնահատեք 1–5 աստղ և գրեք մեկնաբանություն։',
+    'reviews.form.name.ph':'Ձեր անունը','reviews.form.comment.ph':'Ձեր մեկնաբանությունը','reviews.form.send':'Արտահնել','reviews.form.clear':'Մաքրել',
+    'footer.copyright':'© Շինարարություն – Բոլոր իրավունքները պաշտպանված են','footer.contacts':'Էլ․՝ info.adar.llc@gmail.com · +374 98 841920',
+    'noReviewsYet':'Մինչ այժմ կարծիքներ չկան — եղեք առաջինը։',
+    'demoFormNotice':'Դեմո ռեժիմ — ձևը չի ուղարկվել (API_ENDPOINT չի նշված).',
+    'sendError':'Ուղարկման սխալ, փորձեք ավելի ուշ կամ զանգահարեք: +374 00 000000'
+  },
+  en: {
+    'brand.name':'Construction','brand.tagline':'Construction & Architecture',
+    'nav.home':'Home','nav.services':'Services','nav.projects':'Projects','nav.about':'About','nav.contact':'Contact','nav.reviews':'Reviews',
+    'menu.design':'Design & BIM','menu.residential':'Residential','menu.commercial':'Commercial','menu.team':'Team','menu.construction':'Construction','menu.beforeafter':'Before/After','menu.certs':'Certificates','menu.contact':'Sales contact','menu.maintenance':'Maintenance','menu.infra':'Infrastructure','menu.values':'Values','menu.reviews':'Customer reviews',
+    'home.kicker':'Construction solutions','home.title':'We build your future — on time & with quality','home.lead':'One team — full services from design to handover. Quality, safety, warranty.',
+    'carousel.prev':'Prev','carousel.next':'Next',
+    'calc.title':'Quick calculator','calc.area':'m²','service.build':'General construction','service.reno':'Renovation','service.full':'Design + execution','calc.button':'Calculate','calc.details':'Details','calc.result':'Total cost:',
+    'back':'← Back',
+    'services.title':'Services — Our Capabilities','services.lead':'We provide a full spectrum of services.',
+    'service.design.title':'Design & BIM','service.design.desc':'2D/3D design, BIM and energy optimization.',
+    'service.construction.title':'Construction','service.construction.desc':'Foundations to finishes — end-to-end construction with QC.',
+    'service.maintenance.title':'Maintenance','service.maintenance.desc':'Post-handover maintenance and support.',
+    'projects.title':'Projects — Case Studies','projects.lead':'Small selection of recent projects.',
+    'about.title':'About AutoBuild','about.lead':'AutoBuild combines engineering rigor with construction excellence.',
+    'about.mission.title':'Our mission','about.mission.desc':'Delivering durable, efficient and safe buildings.',
+    'about.team.title':'Team','about.team.desc':'Experienced engineers and certified contractors.',
+    'contact.title':'Contact','contact.lead':'Fill the form and we\'ll reply with a tailored proposal.',
+    'contact.office.title':'Office','contact.office.info':'Address · info.adar.llc@gmail.com · +374 98 841920',
+    'contact.hours.label':'Working hours','contact.hours.value':'Mon–Fri: 9:00–18:00',
+    'contact.form.name':'Name','contact.form.name.ph':'Name','contact.form.email':'Email','contact.form.email.ph':'example@mail.com','contact.form.phone':'Phone','contact.form.phone.ph':'+374 ...','contact.form.msg':'Message','contact.form.msg.ph':'Project details...',
+    'contact.form.send':'Send','contact.form.reset':'Reset',
+    'reviews.title':'Visitor Reviews','reviews.lead':'Leave your rating and feedback — helps others choose the right partner.',
+    'reviews.avg':'Average:','reviews.count':'reviews','reviews.form.title':'Leave a review','reviews.form.lead':'Rate 1–5 stars and add a short comment.',
+    'reviews.form.name.ph':'Your name','reviews.form.comment.ph':'Your comment','reviews.form.send':'Submit review','reviews.form.clear':'Clear',
+    'footer.copyright':'© Construction — All rights reserved','footer.contacts':'Email · info.adar.llc@gmail.com · Phone · +374 98 841920',
+    'noReviewsYet':'No reviews yet — be the first.',
+    'demoFormNotice':'Demo mode — form not sent (API_ENDPOINT empty).',
+    'sendError':'Send error, try later or call: +374 00 000000'
+  },
+  ru: {
+    'brand.name':'Строительство','brand.tagline':'Строительство и архитектура',
+    'nav.home':'Главная','nav.services':'Услуги','nav.projects':'Проекты','nav.about':'О нас','nav.contact':'Контакты','nav.reviews':'Отзывы',
+    'menu.design':'Дизайн & BIM','menu.residential':'Жилые','menu.commercial':'Коммерческие','menu.team':'Команда','menu.construction':'Строительство','menu.beforeafter':'До/После','menu.certs':'Сертификаты','menu.contact':'Связь с продажами','menu.maintenance':'Обслуживание','menu.infra':'Инфраструктура','menu.values':'Ценности','menu.reviews':'Отзывы клиентов',
+    'home.kicker':'Строительные решения','home.title':'Мы строим ваше будущее — вовремя и качественно','home.lead':'Одна команда — полный цикл от дизайна до сдачи. Качество, безопасность, гарантия.',
+    'carousel.prev':'Назад','carousel.next':'Вперед',
+    'calc.title':'Быстрый калькулятор','calc.area':'м²','service.build':'Общее строительство','service.reno':'Ремонт','service.full':'Проект + реализация','calc.button':'Рассчитать','calc.details':'Подробнее','calc.result':'Общая стоимость:',
+    'back':'← Назад',
+    'services.title':'Услуги — Наши возможности','services.lead':'Мы предоставляем полный спектр услуг.',
+    'service.design.title':'Дизайн и BIM','service.design.desc':'2D/3D дизайн, BIM и оптимизация энергии.',
+    'service.construction.title':'Строительство','service.construction.desc':'От фундамента до отделки — полный цикл строительства с контролем качества.',
+    'service.maintenance.title':'Обслуживание','service.maintenance.desc':'Гарантийное обслуживание и техподдержка.',
+    'projects.title':'Проекты — Кейсы','projects.lead':'Небольшой выбор недавних проектов.',
+    'about.title':'О AutoBuild','about.lead':'AutoBuild сочетает инженерную строгость и строительное мастерство.',
+    'about.mission.title':'Наша миссия','about.mission.desc':'Создавать прочные, эффективные и безопасные здания.',
+    'about.team.title':'Команда','about.team.desc':'Опытные инженеры и сертифицированные подрядчики.',
+    'contact.title':'Контакты','contact.lead':'Заполните форму — мы ответим с предложением.',
+    'contact.office.title':'Офис','contact.office.info':'Адрес · info.adar.llc@gmail.com · +374 98 841920',
+    'contact.hours.label':'Часы работы','contact.hours.value':'Пн–Пт: 9:00–18:00',
+    'contact.form.name':'Имя','contact.form.name.ph':'Имя','contact.form.email':'Email','contact.form.email.ph':'example@mail.com','contact.form.phone':'Телефон','contact.form.phone.ph':'+374 ...','contact.form.msg':'Сообщение','contact.form.msg.ph':'Детали проекта...',
+    'contact.form.send':'Отправить','contact.form.reset':'Сброс',
+    'reviews.title':'Отзывы','reviews.lead':'Оставьте рейтинг и отзыв — это поможет другим.',
+    'reviews.avg':'Средний:','reviews.count':'отзывов','reviews.form.title':'Оставить отзыв','reviews.form.lead':'Оцените 1–5 звёзд и добавьте комментарий.',
+    'reviews.form.name.ph':'Ваше имя','reviews.form.comment.ph':'Ваш комментарий','reviews.form.send':'Отправить отзыв','reviews.form.clear':'Очистить',
+    'footer.copyright':'© Строительство — Все права защищены','footer.contacts':'Email · info.adar.llc@gmail.com · Телефон · +374 98 841920',
+    'noReviewsYet':'Пока нет отзывов — будьте первым.',
+    'demoFormNotice':'Демо-режим — форма не отправлена (API_ENDPOINT пуст).',
+    'sendError':'Ошибка отправки, попробуйте позже или позвоните: +374 00 000000'
+  }
+};
+
+const slidesByLang = {
+  hy: [
+    {type:'image', title:'Բնակելի համալիր', subtitle:'Հարմարավետություն և դիզայն', src:'https://www.rustomjee.com/blog/wp-content/uploads/2024/08/IMAGE_1000-X-374-copy.jpg'},
+    {type:'image', title:'Արևային էլեկտրակայան', subtitle:'Կայուն էներգիա', src:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8k-Vm1DbZDJFCvkpdhbT5lWGsMfrW1e_jKA&s'},
+    {type:'video', title:'Կայքի առաջընթաց', subtitle:'Ժամանակաչափի նկարահանում', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&q=60&auto=format&fit=crop'},
+    {type:'text', title:'Աշխատանքային փորձ', subtitle:'3 տարվա', text:'3+ տարի ճարտարագիտական ​​խստություն, գերազանց առաքում։'},
+    {type:'image', title:'Առևտրային կենտրոն', subtitle:'Խելացի տարածքներ', src:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&auto=format&fit=crop'}
+  ],
+  en: [
+    {type:'image', title:'Residential Complex', subtitle:'Comfort & design', src:'https://www.rustomjee.com/blog/wp-content/uploads/2024/08/IMAGE_1000-X-374-copy.jpg'},
+    {type:'image', title:'Solar Plant', subtitle:'Sustainable energy', src:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8k-Vm1DbZDJFCvkpdhbT5lWGsMfrW1e_jKA&s'},
+    {type:'video', title:'Site progress', subtitle:'Time-lapse footage', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&q=60&auto=format&fit=crop'},
+    {type:'text', title:'Work experience', subtitle:'3 years', text:'3+ years of engineering rigor and excellent delivery.'},
+    {type:'image', title:'Commercial Center', subtitle:'Smart spaces', src:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&auto=format&fit=crop'}
+  ],
+  ru: [
+    {type:'image', title:'Жилой комплекс', subtitle:'Комфорт и дизайн', src:'https://www.rustomjee.com/blog/wp-content/uploads/2024/08/IMAGE_1000-X-374-copy.jpg'},
+    {type:'image', title:'Солнечная станция', subtitle:'Устойчивая энергия', src:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8k-Vm1DbZDJFCvkpdhbT5lWGsMfrW1e_jKA&s'},
+    {type:'video', title:'Прогресс на площадке', subtitle:'Таймлапс', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&q=60&auto=format&fit=crop'},
+    {type:'text', title:'Опыт работы', subtitle:'3 года', text:'3+ года инженерной строгости и отличной реализации.'},
+    {type:'image', title:'Торговый центр', subtitle:'Современные пространства', src:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&auto=format&fit=crop'}
+  ]
+};
+
+function translatePage(lang){
+  const dict = i18n[lang] || {};
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    if(!key) return;
+    const txt = dict[key] ?? '';
+    el.innerHTML = txt;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key = el.dataset.i18nPlaceholder;
+    const txt = dict[key] ?? '';
+    if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = txt;
+    else el.setAttribute('placeholder', txt);
+  });
+  document.querySelectorAll('[data-i18n-value]').forEach(el=>{
+    const key = el.dataset.i18nValue;
+    const txt = dict[key] ?? '';
+    el.value = txt;
+  });
+  document.querySelectorAll('option[data-i18n-option]').forEach(opt=>{
+    const key = opt.dataset.i18nOption;
+    const txt = dict[key] ?? '';
+    opt.textContent = txt;
+  });
+  const reviewsList = document.getElementById('reviewsList');
+  if(reviewsList && (!reviewsList.children || reviewsList.children.length===0)){
+    reviewsList.innerHTML = `<div class="muted">${dict['noReviewsYet'] ?? ''}</div>`;
+  }
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    const is = b.dataset.lang === lang;
+    b.classList.toggle('active', is);
+    b.setAttribute('aria-pressed', is ? 'true' : 'false');
+  });
+  renderSlides(lang);
 }
-window.addEventListener('popstate', (e)=> {
-  const state = e.state && e.state.page ? e.state.page : 'home';
-  showPage(state, false);
-});
-
-
-document.querySelectorAll('[data-page]').forEach(a=> a.addEventListener('click', (ev)=>{
-  ev.preventDefault();
-  const p = a.dataset.page;
-  showPage(p);
-}));
-
-document.getElementById('backFromServices').addEventListener('click', ()=> history.back());
-document.getElementById('backFromProjects').addEventListener('click', ()=> history.back());
-document.getElementById('backFromAbout').addEventListener('click', ()=> history.back());
-document.getElementById('backFromContact').addEventListener('click', ()=> history.back());
-document.getElementById('backFromReviews').addEventListener('click', ()=> history.back());
-
-
-const slides = [
-  {type:'image', title:'Բնակելի համալիր', subtitle:'Հարմարավետություն և դիզայն', src:'https://www.rustomjee.com/blog/wp-content/uploads/2024/08/IMAGE_1000-X-374-copy.jpg'},
-  {type:'image', title:'Արևային էլեկտրակայան', subtitle:'Կայուն էներգիա', src:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8k-Vm1DbZDJFCvkpdhbT5lWGsMfrW1e_jKA&s'},
-  {type:'video', title:'Կայքի առաջընթաց', subtitle:'Ժամանակաչափի նկարահանում', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&q=60&auto=format&fit=crop'},
-  {type:'text', title:'Աշխատանքային փորձ', subtitle:'3 տարվա', text:'3+ տարի ճարտարագիտական ​​խստություն, գերազանց առաքում։'},
-  {type:'image', title:'Առևտրային կենտրոն', subtitle:'Խելացի տարածքներ', src:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&auto=format&fit=crop'}
-];
 
 const carousel = document.getElementById('carousel');
-slides.forEach((s,i)=>{
-  const el = document.createElement('div'); el.className='slide'; el.dataset.index = i;
-  if(s.type==='image'){
-    const img = document.createElement('img'); img.src = s.src; img.alt = s.title || 'slide';
-    el.appendChild(img);
-  } else if(s.type==='video'){
-    const vid = document.createElement('video'); vid.src = s.src; vid.poster = s.poster||''; vid.muted=true; vid.playsInline=true; vid.loop=true; vid.preload='metadata';
-    el.appendChild(vid);
-  } else if(s.type==='text'){
-    const wrap = document.createElement('div'); wrap.style.padding='18px';
-    wrap.innerHTML = `<div style="font-weight:800;font-size:18px">${escapeHtml(s.title)}</div><div style="color:var(--muted);margin-top:6px">${escapeHtml(s.subtitle)}</div><p style="margin-top:12px">${escapeHtml(s.text)}</p>`;
-    el.appendChild(wrap);
-  }
-  const meta = document.createElement('div'); meta.className='meta'; meta.innerHTML = `<h4>${escapeHtml(s.title||'')}</h4><p>${escapeHtml(s.subtitle||'')}</p>`;
-  el.appendChild(meta);
-  carousel.appendChild(el);
-});
+function renderSlides(lang){
+  const arr = slidesByLang[lang] || slidesByLang[defaultLang];
+  carousel.innerHTML = '';
+  arr.forEach((s,i)=>{
+    const el = document.createElement('div'); el.className='slide'; el.dataset.index = i;
+    if(s.type==='image'){
+      const img = document.createElement('img'); img.src = s.src; img.alt = s.title || 'slide';
+      el.appendChild(img);
+    } else if(s.type==='video'){
+      const vid = document.createElement('video'); vid.src = s.src; vid.poster = s.poster||''; vid.muted=true; vid.playsInline=true; vid.loop=true; vid.preload='metadata';
+      el.appendChild(vid);
+    } else if(s.type==='text'){
+      const wrap = document.createElement('div'); wrap.style.padding='18px';
+      wrap.innerHTML = `<div style="font-weight:800;font-size:18px">${escapeHtml(s.title)}</div><div style="color:var(--muted);margin-top:6px">${escapeHtml(s.subtitle)}</div><p style="margin-top:12px">${escapeHtml(s.text||'')}</p>`;
+      el.appendChild(wrap);
+    }
+    const meta = document.createElement('div'); meta.className='meta'; meta.innerHTML = `<h4>${escapeHtml(s.title||'')}</h4><p>${escapeHtml(s.subtitle||'')}</p>`;
+    el.appendChild(meta);
+    carousel.appendChild(el);
+  });
+  setTimeout(()=> {
+    slideEls = Array.from(document.querySelectorAll('.slide'));
+    const total = slideEls.reduce((s,el)=> s + el.offsetWidth + 10, 0);
+    carousel.style.width = total + 'px';
+    slideIndex = 0;
+    updateCarousel();
+  }, 80);
+}
 
 let slideIndex = 0;
-const slideEls = Array.from(document.querySelectorAll('.slide'));
+let slideEls = Array.from(document.querySelectorAll('.slide'));
 function updateCarousel(){
+  if(!slideEls.length) return;
   const gap = 10;
   const slideWidth = slideEls[0].offsetWidth + gap;
   const offset = -(slideIndex * slideWidth);
@@ -447,10 +589,10 @@ function resetAutoplay(){ stopAutoplay(); setTimeout(startAutoplay, AUTO_PLAY_MS
 
 carousel.addEventListener('mouseenter', ()=> stopAutoplay());
 carousel.addEventListener('mouseleave', ()=> startAutoplay());
-window.addEventListener('resize', ()=> setTimeout(()=> { 
+window.addEventListener('resize', ()=> setTimeout(()=> {
+  slideEls = Array.from(document.querySelectorAll('.slide'));
   const total = slideEls.reduce((s,el)=> s + el.offsetWidth + 10, 0); carousel.style.width = total + 'px'; updateCarousel();
 }, 120));
-window.addEventListener('load', ()=> { const total = slideEls.reduce((s,el)=> s + el.offsetWidth + 10, 0); carousel.style.width = total + 'px'; updateCarousel(); startAutoplay(); });
 
 const topbar = document.getElementById('topbar');
 const menuPanel = document.getElementById('menuPanel');
@@ -501,17 +643,20 @@ document.getElementById('calcBtn').addEventListener('click', ()=> {
   const totalUSD = (totalAMD / USD_RATE).toFixed(2);
   const totalRUB = Math.round(totalAMD / RUB_RATE);
 
+  const dict = i18n[currentLang] || i18n[defaultLang];
+  const resultPrefix = dict['calc.result'] ?? '';
+
   document.getElementById('calcVal').innerHTML = totalAMD
     ? `
       <strong>${totalAMD.toLocaleString()} AMD</strong><br>
       <span style="color:var(--muted)">
-        ${totalUSD} USD • ${totalRUB.toLocaleString()} RUB
+        ${(totalUSD)} USD • ${totalRUB.toLocaleString()} RUB
       </span>
     `
     : '—';
+  const calcResultEl = document.getElementById('calcResult');
+  if(calcResultEl) calcResultEl.firstChild && calcResultEl.firstChild.nodeValue === null ? calcResultEl.innerHTML = `${resultPrefix} <strong id="calcVal">${totalAMD? totalAMD.toLocaleString() + ' AMD' : '—'}</strong>` : null;
 });
-
-document.getElementById('openContactFromCalc').addEventListener('click', ()=> showPage('contact'));
 
 const cfSend = document.getElementById('cfSend'), cfReset = document.getElementById('cfReset'), cfStatus = document.getElementById('cfStatus');
 let lastSent = 0;
@@ -521,7 +666,8 @@ cfSend.addEventListener('click', async ()=> {
   const email = document.getElementById('cfEmail').value.trim();
   const phone = document.getElementById('cfPhone').value.trim();
   const message = document.getElementById('cfMsg').value.trim();
-  if(name.length < 2){ cfStatus.textContent='Enter your name.'; cfStatus.style.color='crimson'; return; }
+  const dict = i18n[currentLang] || i18n[defaultLang];
+  if(name.length < 2){ cfStatus.textContent = dict['contact.form.name'] ? dict['contact.form.name'] + ' ' + 'is required.' : 'Enter your name.'; cfStatus.style.color='crimson'; return; }
   if(!email && !phone){ cfStatus.textContent='Please leave email or phone.'; cfStatus.style.color='crimson'; return; }
   if(email && !validEmail(email)){ cfStatus.textContent='Email format invalid.'; cfStatus.style.color='crimson'; return; }
   if(Date.now() - lastSent < 10000){ cfStatus.textContent='Please wait a few seconds before sending again.'; cfStatus.style.color='crimson'; return; }
@@ -539,12 +685,12 @@ cfSend.addEventListener('click', async ()=> {
       document.getElementById('contactForm').reset();
     } else {
       await new Promise(r=>setTimeout(r,900));
-      cfStatus.textContent = 'Demo mode — form not sent (API_ENDPOINT empty).';
+      cfStatus.textContent = (i18n[currentLang] || i18n[defaultLang])['demoFormNotice'] || 'Demo mode — form not sent (API_ENDPOINT empty).';
       cfStatus.style.color='green';
     }
   }catch(err){
     console.error(err);
-    cfStatus.textContent = 'Send error, try later or call: +374 00 000000'; cfStatus.style.color='crimson';
+    cfStatus.textContent = (i18n[currentLang] || i18n[defaultLang])['sendError'] || 'Send error, try later or call: +374 00 000000'; cfStatus.style.color='crimson';
   } finally {
     cfSend.disabled=false; cfSend.textContent='Send';
     cfSend.disabled=true; setTimeout(()=> cfSend.disabled=false, 10000);
@@ -572,7 +718,7 @@ function loadReviews(){
   try{
     const arr = JSON.parse(raw);
     reviewsList.innerHTML = '';
-    if(arr.length===0) reviewsList.innerHTML = '<div class="muted">No reviews yet — be the first.</div>';
+    if(arr.length===0) reviewsList.innerHTML = `<div class="muted">${(i18n[currentLang] || i18n[defaultLang])['noReviewsYet']}</div>`;
     arr.slice().reverse().forEach(r=>{
       const el = document.createElement('div'); el.className='review';
       el.innerHTML = `<div style="display:flex;justify-content:space-between"><strong>${escapeHtml(r.name)}</strong><div>${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div><div style="margin-top:8px;color:var(--muted)">${escapeHtml(r.comment)}</div><div style="margin-top:6px;font-size:12px;color:var(--muted)">${new Date(r.ts).toLocaleString()}</div>`;
@@ -590,8 +736,9 @@ loadReviews();
 document.getElementById('rvSend').addEventListener('click', ()=> {
   const name = (document.getElementById('rvName').value||'').trim();
   const comment = (document.getElementById('rvComment').value||'').trim();
-  if(!selectedStar){ rvStatus.textContent='Please select a star rating.'; rvStatus.style.color='crimson'; return; }
-  if(name.length < 2){ rvStatus.textContent='Please enter your name.'; rvStatus.style.color='crimson'; return; }
+  const dict = i18n[currentLang] || i18n[defaultLang];
+  if(!selectedStar){ rvStatus.textContent=(dict['reviews.form.lead'] || 'Please select a star rating.'); rvStatus.style.color='crimson'; return; }
+  if(name.length < 2){ rvStatus.textContent=(dict['contact.form.name'] || 'Please enter your name.'); rvStatus.style.color='crimson'; return; }
   const last = Number(localStorage.getItem('autobuild_last_review_ts') || '0');
   if(Date.now() - last < 30000){ rvStatus.textContent='Please wait before submitting another review.'; rvStatus.style.color='crimson'; return; }
   const raw = localStorage.getItem('autobuild_reviews') || '[]';
@@ -600,7 +747,7 @@ document.getElementById('rvSend').addEventListener('click', ()=> {
   arr.push(rec);
   localStorage.setItem('autobuild_reviews', JSON.stringify(arr));
   localStorage.setItem('autobuild_last_review_ts', Date.now().toString());
-  rvStatus.textContent = 'Thanks — your review is posted.';
+  rvStatus.textContent = (dict['reviews.form.send'] ? 'Thanks — your review is posted.' : 'Thanks — your review is posted.');
   rvStatus.style.color = 'green';
   document.getElementById('rvName').value=''; document.getElementById('rvComment').value=''; selectedStar=0; highlightStars(0);
   loadReviews();
@@ -608,9 +755,52 @@ document.getElementById('rvSend').addEventListener('click', ()=> {
 
 function escapeHtml(s){ return String(s||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
 
+document.querySelectorAll('.lang-btn').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    const l = b.dataset.lang;
+    if(!availableLangs.includes(l)) return;
+    currentLang = l;
+    localStorage.setItem('autobuild_lang', l);
+    translatePage(l);
+    loadReviews();
+  });
+});
+
+const pages = ['home','services','projects','about','contact','reviews'];
+function showPage(slug, push=true){
+  pages.forEach(p=> document.getElementById('page-' + p).classList.remove('active'));
+  const node = document.getElementById('page-' + slug);
+  if(!node) return;
+  node.classList.add('active');
+  const dict = i18n[currentLang] || i18n[defaultLang];
+  const navKey = 'nav.' + slug;
+  const label = dict[navKey] || (slug.charAt(0).toUpperCase()+slug.slice(1));
+  document.title = `Auto Build — ${label}`;
+  if(push) history.pushState({page:slug}, '', (slug==='home' ? '/' : '/' + slug));
+  window.scrollTo({top: document.querySelector('.hero-ghost') ? document.querySelector('.hero-ghost').offsetTop : 0, behavior:'smooth'});
+}
+window.addEventListener('popstate', (e)=> {
+  const state = e.state && e.state.page ? e.state.page : 'home';
+  showPage(state, false);
+});
+document.querySelectorAll('[data-page]').forEach(a=> a.addEventListener('click', (ev)=>{ ev.preventDefault(); const p = a.dataset.page; showPage(p); }));
+
+document.getElementById('backFromServices').addEventListener('click', ()=> history.back());
+document.getElementById('backFromProjects').addEventListener('click', ()=> history.back());
+document.getElementById('backFromAbout').addEventListener('click', ()=> history.back());
+document.getElementById('backFromContact').addEventListener('click', ()=> history.back());
+document.getElementById('backFromReviews').addEventListener('click', ()=> history.back());
+
 (function boot(){
   const path = location.pathname.replace(/^\//,'') || 'home';
   const candidate = pages.includes(path) ? path : 'home';
+  translatePage(currentLang);
+  renderSlides(currentLang);
+  slideEls = Array.from(document.querySelectorAll('.slide'));
+  const total = slideEls.reduce((s,el)=> s + el.offsetWidth + 10, 0);
+  carousel.style.width = total + 'px';
+  updateCarousel();
+  startAutoplay();
   showPage(candidate, false);
 })();
 
@@ -635,10 +825,111 @@ document.addEventListener('visibilitychange', ()=> { if(document.hidden) stopAut
   }
 })();
 
+
+(function(){
+  document.addEventListener('DOMContentLoaded', ()=> {
+    if(typeof availableLangs === 'undefined') window.availableLangs = ['hy','en','ru'];
+    if(typeof defaultLang === 'undefined') window.defaultLang = 'hy';
+    if(typeof currentLang === 'undefined') window.currentLang = localStorage.getItem('autobuild_lang') || window.defaultLang;
+
+    const quickForm = document.getElementById('quickCalc');
+    const calcBtn = document.getElementById('calcBtn');
+    const calcResultEl = document.getElementById('calcResult');
+    const calcValEl = () => document.getElementById('calcVal');
+    const areaInput = document.getElementById('area');
+    const serviceSel = document.getElementById('serviceType');
+    if(quickForm){
+      quickForm.addEventListener('submit', function(e){
+        e.preventDefault();
+      }, {passive:false});
+    }
+    if(calcBtn && calcBtn.tagName === 'BUTTON'){
+      try { calcBtn.type = 'button'; } catch(e){}
+    }
+
+    function ensureCalcValExists(){
+      if(!calcResultEl) return;
+      if(!calcValEl()){
+        const dict = (typeof i18n !== 'undefined' ? (i18n[currentLang] || i18n[defaultLang]) : null);
+        const prefix = dict && dict['calc.result'] ? dict['calc.result'] : 'Ընդհանուր արժեք՝';
+        calcResultEl.innerHTML = `${prefix} <strong id="calcVal">—</strong>`;
+      }
+    }
+    ensureCalcValExists();
+
+    if(calcResultEl && window.MutationObserver){
+      const mo = new MutationObserver((mutations)=>{
+        ensureCalcValExists();
+      });
+      mo.observe(calcResultEl, {childList:true, subtree:true, characterData:true});
+    }
+
+    function computeEstimate(){
+      if(!areaInput || !serviceSel || !calcValEl()) return;
+      const area = Math.max(0, Number(areaInput.value) || 0);
+      const type = serviceSel.value || 'build';
+      let rateAMD = 40000;
+      if(type === 'reno') rateAMD = 30000;
+      if(type === 'full') rateAMD = 55000;
+      const totalAMD = Math.round(area * rateAMD);
+      const USD_RATE = 410;
+      const RUB_RATE = 4.5;
+      const totalUSD = totalAMD ? (totalAMD / USD_RATE).toFixed(2) : '0.00';
+      const totalRUB = totalAMD ? Math.round(totalAMD / RUB_RATE) : 0;
+
+
+      const valHtml = totalAMD
+        ? `<strong>${totalAMD.toLocaleString()} AMD</strong><br><span style="color:var(--muted)">${totalUSD} USD • ${totalRUB.toLocaleString()} RUB</span>`
+        : '—';
+
+
+      ensureCalcValExists();
+      const valNode = calcValEl();
+      if(valNode) {
+        valNode.innerHTML = totalAMD ? `${totalAMD.toLocaleString()} AMD` : '—';
+        calcResultEl.querySelector('span')?.remove(); 
+        const small = document.createElement('div');
+        small.style.color = 'var(--muted)';
+        small.style.marginTop = '6px';
+        small.innerHTML = `${totalUSD} USD • ${totalRUB.toLocaleString()} RUB`;
+        const prev = calcResultEl.querySelector('.__calc_extra');
+        if(prev) prev.remove();
+        small.className = '__calc_extra';
+        calcResultEl.appendChild(small);
+      }
+    }
+
+
+    if(calcBtn){
+      calcBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        computeEstimate();
+      });
+    } else {
+      [areaInput, serviceSel].forEach(el=>{
+        if(!el) return;
+        el.addEventListener('input', ()=> { computeEstimate(); });
+      });
+    }
+
+    
+    document.querySelectorAll('.lang-btn').forEach(b=>{
+      b.addEventListener('click', ()=> {
+        setTimeout(()=>{
+          ensureCalcValExists();
+          computeEstimate();
+        }, 90);
+      });
+    });
+
+    setTimeout(()=> { ensureCalcValExists(); computeEstimate(); }, 120);
+
+  }); 
+})(); 
+
 </script>
 
 </body>
-</html>
 </html>
 
 
