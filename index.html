@@ -87,6 +87,40 @@
       .projects .project img{height:160px}
       .contact-grid{grid-template-columns:1fr}
     }
+
+img, video { max-width:100%; height:auto; display:block; }
+html, body { -webkit-text-size-adjust:100%; }
+
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr !important; padding: 42px 16px !important; min-height: auto !important; }
+  .hero .right { margin-top: 18px; }
+}
+
+
+@media (max-width: 700px) {
+  .slide { min-width: 220px; flex: 0 0 220px; }
+  .slide img, .slide video { height: 140px; object-fit: cover; }
+  .carousel { gap: 8px; }
+  .services { grid-template-columns: 1fr 1fr; }
+  .projects { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; }
+  p, .muted { font-size: 15px; }
+
+
+  button, .btn-quote, .ctrl { min-height: 44px; padding: 10px 12px; touch-action: manipulation; }
+  html, body { overflow-x: hidden; }
+}
+
+@media (max-width: 1100px) {
+  .services { grid-template-columns: 1fr 1fr; }
+}
+
+.project img, .card img { width:100%; height:auto; object-fit:cover; }
+
   </style>
 </head>
 <body>
@@ -589,6 +623,20 @@ carousel.addEventListener('keydown', (e)=> {
 });
 
 document.addEventListener('visibilitychange', ()=> { if(document.hidden) stopAutoplay(); else startAutoplay(); });
+
+(function enhanceMobileToggle(){
+  const btn = document.getElementById('mobileToggle');
+  if(btn){
+    btn.innerHTML = '☰';
+    btn.style.fontSize = '20px';
+    btn.style.background = 'transparent';
+    btn.style.color = '#fff';
+    btn.style.border = '0';
+    btn.style.padding = '6px 10px';
+    btn.style.cursor = 'pointer';
+    btn.setAttribute('aria-label','Open menu');
+  }
+})();
 
 </script>
 
