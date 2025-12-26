@@ -459,12 +459,27 @@ projects.forEach(p=> p.addEventListener('click', ()=> {
 document.getElementById('calcBtn').addEventListener('click', ()=> {
   const area = Math.max(0, Number(document.getElementById('area').value) || 0);
   const type = document.getElementById('serviceType').value;
-  let rate = 40;
-  if(type==='reno') rate = 30;
-  if(type==='full') rate = 55;
-  const total = Math.round(area * rate);
-  document.getElementById('calcVal').textContent = total ? `${total.toLocaleString()} AMD` : '—';
+  let rateAMD = 40000;          
+  if(type === 'reno') rateAMD = 30000;
+  if(type === 'full') rateAMD = 55000;
+
+  const totalAMD = Math.round(area * rateAMD);
+  const USD_RATE = 410; 
+  const RUB_RATE = 4.5; 
+
+  const totalUSD = (totalAMD / USD_RATE).toFixed(2);
+  const totalRUB = Math.round(totalAMD / RUB_RATE);
+
+  document.getElementById('calcVal').innerHTML = totalAMD
+    ? `
+      <strong>${totalAMD.toLocaleString()} AMD</strong><br>
+      <span style="color:var(--muted)">
+        ${totalUSD} USD • ${totalRUB.toLocaleString()} RUB
+      </span>
+    `
+    : '—';
 });
+
 document.getElementById('openContactFromCalc').addEventListener('click', ()=> showPage('contact'));
 
 const cfSend = document.getElementById('cfSend'), cfReset = document.getElementById('cfReset'), cfStatus = document.getElementById('cfStatus');
