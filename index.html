@@ -370,6 +370,7 @@ html, body { -webkit-text-size-adjust:100%; }
     </div>
   </div>
 
+
 <script>
 
 const API_ENDPOINT = ''; 
@@ -408,7 +409,9 @@ const i18n = {
     'footer.copyright':'© Շինարարություն – Բոլոր իրավունքները պաշտպանված են','footer.contacts':'Էլ Հասցե · info.adar.llc@gmail.com · Հեռախոսահամար · +374 98 841920',
     'noReviewsYet':'Մինչ այժմ կարծիքներ չկան — եղեք առաջինը։',
     'demoFormNotice':'Դեմո ռեժիմ — ձևը չի ուղարկվել (API_ENDPOINT չի նշված).',
-    'sendError':'Ուղարկման սխալ, փորձեք ավելի ուշ կամ զանգահարեք: +374 00 000000'
+    'sendError':'Ուղարկման սխալ, փորձեք ավելի ուշ կամ զանգահարեք: +374 00 000000',
+    "calc.save": "Անցնել",
+    "calc.details": "Մանրամասներ"
   },
   en: {
     'brand.name':'Construction','brand.tagline':'Construction & Architecture',
@@ -437,7 +440,9 @@ const i18n = {
     'footer.copyright':'© Construction — All rights reserved','footer.contacts':'Email · info.adar.llc@gmail.com · Phone · +374 98 841920',
     'noReviewsYet':'No reviews yet — be the first.',
     'demoFormNotice':'Demo mode — form not sent (API_ENDPOINT empty).',
-    'sendError':'Send error, try later or call: +374 00 000000'
+    'sendError':'Send error, try later or call: +374 00 000000',
+    "calc.save": "Next",
+    "calc.details": "Details"
   },
   ru: {
     'brand.name':'Строительство','brand.tagline':'Строительство и архитектура',
@@ -466,7 +471,9 @@ const i18n = {
     'footer.copyright':'© Строительство — Все права защищены','footer.contacts':'Email · info.adar.llc@gmail.com · Телефон · +374 98 841920',
     'noReviewsYet':'Пока нет отзывов — будьте первым.',
     'demoFormNotice':'Демо-режим — форма не отправлена (API_ENDPOINT пуст).',
-    'sendError':'Ошибка отправки, попробуйте позже или позвоните: +374 00 000000'
+    'sendError':'Ошибка отправки, попробуйте позже или позвоните: +374 00 000000',
+    "calc.save": "Следушый",
+    "calc.details": "Подробнее"
   }
 };
 
@@ -635,6 +642,7 @@ document.getElementById('calcBtn').addEventListener('click', ()=> {
   let rateAMD = 180000; 
   if(type === 'reno') rateAMD = 120000; 
   if(type === 'full') rateAMD = 250000; 
+
 
   const totalAMD = Math.round(area * rateAMD);
   const USD_RATE = 410; 
@@ -864,41 +872,129 @@ document.addEventListener('visibilitychange', ()=> { if(document.hidden) stopAut
       mo.observe(calcResultEl, {childList:true, subtree:true, characterData:true});
     }
 
-    function computeEstimate(){
-      if(!areaInput || !serviceSel || !calcValEl()) return;
-      const area = Math.max(0, Number(areaInput.value) || 0);
-      const type = serviceSel.value || 'build';
-      let rateAMD = 40000;
-      if(type === 'reno') rateAMD = 30000;
-      if(type === 'full') rateAMD = 55000;
-      const totalAMD = Math.round(area * rateAMD);
-      const USD_RATE = 410;
-      const RUB_RATE = 4.5;
-      const totalUSD = totalAMD ? (totalAMD / USD_RATE).toFixed(2) : '0.00';
-      const totalRUB = totalAMD ? Math.round(totalAMD / RUB_RATE) : 0;
+function computeEstimate(){
+  if(!areaInput || !serviceSel || !calcValEl()) return;
+  const area = Math.max(0, Number(areaInput.value) || 0);
+  const type = serviceSel.value || 'build';
+  let rateAMD = 180000;   
+  if(type === 'reno') rateAMD = 120000;  
+  if(type === 'full') rateAMD = 250000;   
 
+  const totalAMD = Math.round(area * rateAMD);
+  const USD_RATE = 410;
+  const RUB_RATE = 4.5;
 
-      const valHtml = totalAMD
-        ? `<strong>${totalAMD.toLocaleString()} AMD</strong><br><span style="color:var(--muted)">${totalUSD} USD • ${totalRUB.toLocaleString()} RUB</span>`
-        : '—';
+  const totalUSD = totalAMD ? (totalAMD / USD_RATE).toFixed(2) : '0.00';
+  const totalRUB = totalAMD ? Math.round(totalAMD / RUB_RATE) : 0;
 
+  window.autobuild_last_quote = {
+    area,
+    type,
+    rateAMD,
+    totalAMD,
+    totalUSD,
+    totalRUB,
+    ts: Date.now()
+  };
+  try { localStorage.setItem('autobuild_last_quote', JSON.stringify(window.autobuild_last_quote)); } catch(e){}
 
-      ensureCalcValExists();
-      const valNode = calcValEl();
-      if(valNode) {
-        valNode.innerHTML = totalAMD ? `${totalAMD.toLocaleString()} AMD` : '—';
-        calcResultEl.querySelector('span')?.remove(); 
-        const small = document.createElement('div');
-        small.style.color = 'var(--muted)';
-        small.style.marginTop = '6px';
-        small.innerHTML = `${totalUSD} USD • ${totalRUB.toLocaleString()} RUB`;
-        const prev = calcResultEl.querySelector('.__calc_extra');
-        if(prev) prev.remove();
-        small.className = '__calc_extra';
-        calcResultEl.appendChild(small);
+  const valHtml = totalAMD
+    ? `<strong>${totalAMD.toLocaleString()} AMD</strong><br><span style="color:var(--muted)">${totalUSD} USD • ${totalRUB.toLocaleString()} RUB</span>`
+    : '—';
+
+  ensureCalcValExists();
+  const valNode = calcValEl();
+  const dict = (typeof i18n !== 'undefined') ? (i18n[currentLang] || i18n[defaultLang]) : null;
+  const saveLabel = (dict && dict['calc.save']) ? dict['calc.save'] : 'Save estimate';
+  const detailsLabel = (dict && dict['calc.details']) ? dict['calc.details'] : 'Details';
+
+  if(valNode) {
+    valNode.innerHTML = totalAMD ? `${totalAMD.toLocaleString()} AMD` : '—';
+    calcResultEl.querySelector('.__calc_extra')?.remove();
+    calcResultEl.querySelector('.__calc_actions')?.remove();
+
+    const small = document.createElement('div');
+    small.className = '__calc_extra';
+    small.style.color = 'var(--muted)';
+    small.style.marginTop = '6px';
+    small.innerHTML = `${totalUSD} USD • ${totalRUB.toLocaleString()} RUB`;
+    calcResultEl.appendChild(small);
+
+    const actions = document.createElement('div');
+    actions.className = '__calc_actions';
+    actions.style.marginTop = '10px';
+    actions.style.display = 'flex';
+    actions.style.gap = '8px';
+    actions.style.alignItems = 'center';
+
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'button';
+    saveBtn.textContent = saveLabel;
+    saveBtn.style.padding = '8px 12px';
+    saveBtn.style.borderRadius = '8px';
+    saveBtn.style.border = '0';
+    saveBtn.style.background = 'var(--primary)';
+    saveBtn.style.color = '#fff';
+    saveBtn.style.cursor = 'pointer';
+    saveBtn.onclick = ()=> {
+      try{
+        const raw = localStorage.getItem('autobuild_saved_quotes') || '[]';
+        const arr = JSON.parse(raw);
+        arr.push(window.autobuild_last_quote);
+        localStorage.setItem('autobuild_saved_quotes', JSON.stringify(arr));
+        saveBtn.textContent = (dict && dict['calc.save'] ? dict['calc.save'] : saveLabel) + ' ✓';
+        saveBtn.disabled = true;
+        setTimeout(()=> { saveBtn.textContent = saveLabel; saveBtn.disabled = false; }, 2000);
+      }catch(err){
+        console.error('save quote err', err);
+        saveBtn.textContent = (dict && dict['calc.save']) ? dict['calc.save'] : saveLabel;
+        saveBtn.style.background = 'crimson';
+        setTimeout(()=> { saveBtn.textContent = saveLabel; saveBtn.style.background = 'var(--primary)'; }, 2000);
       }
+    };
+
+    const existingDetails = document.getElementById('openContactFromCalc');
+    let detailsBtn;
+    if(existingDetails){
+      detailsBtn = existingDetails;
+      detailsBtn.textContent = detailsLabel;
+    } else {
+      detailsBtn = document.createElement('button');
+      detailsBtn.id = 'openContactFromCalc';
+      detailsBtn.type = 'button';
+      detailsBtn.textContent = detailsLabel;
+      detailsBtn.style.padding = '8px 12px';
+      detailsBtn.style.borderRadius = '8px';
+      detailsBtn.style.border = '1px solid #eef2f7';
+      detailsBtn.style.background = '#fff';
+      detailsBtn.style.color = 'var(--primary)';
+      detailsBtn.style.cursor = 'pointer';
     }
 
+    detailsBtn.onclick = (e)=> {
+      e.preventDefault();
+      const q = window.autobuild_last_quote || JSON.parse(localStorage.getItem('autobuild_last_quote') || 'null');
+      try { showPage('contact'); } catch(err){}
+      setTimeout(()=> {
+        const cfMsg = document.getElementById('cfMsg');
+        const cfName = document.getElementById('cfName');
+        if(cfMsg){
+          const areaTxt = q ? q.area + ' մ²' : (area + ' մ²');
+          const typeKey = (q && q.type) || type;
+          const typeLabel = (typeKey === 'reno') ? ((dict && dict['service.reno']) || 'Renovation') : (typeKey === 'full' ? ((dict && dict['service.full']) || 'Design+Build') : ((dict && dict['service.build']) || 'Build'));
+          const totalTxt = q ? (q.totalAMD.toLocaleString() + ' AMD') : (totalAMD.toLocaleString() + ' AMD');
+          const msgIntro = dict ? (dict['contact.form.msg.ph'] || '') : '';
+          cfMsg.value = `${msgIntro}\n\n${typeLabel}\n${areaTxt}\n${totalTxt}\n`;
+        }
+        if(cfName) cfName.focus();
+      }, 250);
+    };
+
+    actions.appendChild(saveBtn);
+    actions.appendChild(detailsBtn);
+    calcResultEl.appendChild(actions);
+  }
+}
 
     if(calcBtn){
       calcBtn.addEventListener('click', (e)=>{
