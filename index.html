@@ -632,9 +632,9 @@ projects.forEach(p=> p.addEventListener('click', ()=> {
 document.getElementById('calcBtn').addEventListener('click', ()=> {
   const area = Math.max(0, Number(document.getElementById('area').value) || 0);
   const type = document.getElementById('serviceType').value;
-  let rateAMD = 40000;          
-  if(type === 'reno') rateAMD = 30000;
-  if(type === 'full') rateAMD = 55000;
+  let rateAMD = 180000; 
+  if(type === 'reno') rateAMD = 120000; 
+  if(type === 'full') rateAMD = 250000; 
 
   const totalAMD = Math.round(area * rateAMD);
   const USD_RATE = 410; 
