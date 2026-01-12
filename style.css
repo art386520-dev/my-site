@@ -438,3 +438,4 @@ img, video { max-width:100%; height:auto; display:block; object-fit:cover; }
   background:#0f4c81; color:#fff; border:0; padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:700;
 }
 .chat-suggestion button:hover{ filter:brightness(.95) }
+
