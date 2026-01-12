@@ -4,136 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Շինարարական կայք</title>
-  <meta name="description" content="AutoBuild — նախագծում, կառուցում, վերանորոգում. վստահելի, անվտանգ եւ ժամանակին" />
+  <meta name="description" content="Build — նախագծում, կառուցում, վերանորոգում. վստահելի, անվտանգ եւ ժամանակին" />
   <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --primary:#0f4c81;
-      --accent:#ff7a00;
-      --bg:#f6f8fb;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --maxw:1200px;
-      --nav-h:68px;
-      --progress-h:4px;
-      --radius:12px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:#0b1220;-webkit-font-smoothing:antialiased}
-    a{color:inherit}
-    .container{max-width:var(--maxw);margin:0 auto;padding:18px}
-    .topbar{position:fixed;left:0;right:0;top:0;height:var(--nav-h);background:linear-gradient(90deg,var(--primary), #083047);color:#fff;display:flex;align-items:center;z-index:90;box-shadow:0 6px 22px rgba(6,10,20,0.12)}
-    .topbar .inner{width:100%;max-width:var(--maxw);margin:0 auto;padding:10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#0ea5e9,#0284c7);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
-    nav.primary{display:flex;gap:14px;align-items:center}
-    nav.primary a{padding:8px 10px;border-radius:8px;font-weight:600;color:rgba(255,255,255,0.95)}
-    .btn-quote{background:var(--accent);padding:8px 14px;border-radius:10px;border:0;color:#fff;font-weight:700;cursor:pointer}
-    .menu-panel{position:fixed;left:0;right:0;top:var(--nav-h);background:linear-gradient(180deg, rgba(15,76,129,0.98), rgba(8,48,71,0.98));color:#fff;padding:22px 0;display:none;z-index:89}
-    .menu-panel.open{display:block}
-    .menu-grid{max-width:var(--maxw);margin:0 auto;padding:0 18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .menu-item{display:block;padding:10px;border-radius:8px;font-weight:700;opacity:.95}
-    .scroll-progress{position:fixed;left:0;right:0;top:calc(var(--nav-h));height:var(--progress-h);background:linear-gradient(90deg,var(--accent), #ffd29b);width:0%;z-index:88}
-    .hero-ghost{height:calc(var(--nav-h) + var(--progress-h));} 
-    main{padding-top:12px}
-    .page{display:none;opacity:0;transform:translateY(12px);transition:opacity .28s ease, transform .28s ease}
-    .page.active{display:block;opacity:1;transform:translateY(0)}
-    .hero{min-height:62vh;background-image:url('https://images.unsplash.com/photo-1505842465776-3a45a2b6b4b9?w=1800&q=80&auto=format&fit=crop');background-size:cover;background-position:center;display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:center;padding:64px 20px 80px;color:#fff;position:relative;border-radius:0 0 20px 20px}
-    .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.25));border-radius:0 0 20px 20px}
-    .hero .left, .hero .right{position:relative;z-index:2}
-    .kicker{display:inline-block;background:rgba(255,255,255,0.08);padding:6px 10px;border-radius:999px;font-weight:700}
-    h1{font-family:Montserrat, sans-serif;font-size:clamp(28px,4.5vw,44px);margin:14px 0 10px}
-    p.lead{max-width:720px;color:rgba(255,255,255,0.92)}
-    .carousel-wrap{margin-top:18px;background:rgba(255,255,255,0.06);padding:10px;border-radius:12px;overflow:hidden}
-    .carousel{display:flex;gap:10px;transition:transform .8s cubic-bezier(.2,.9,.2,1);align-items:stretch;will-change:transform}
-    .slide{min-width:300px;flex:0 0 300px;border-radius:10px;overflow:hidden;background:#fff;color:#111;position:relative;box-shadow:0 10px 30px rgba(2,6,23,0.08)}
-    .slide img{width:100%;height:180px;object-fit:cover;display:block}
-    .slide video{width:100%;height:180px;object-fit:cover;display:block;background:#000}
-    .slide .meta{padding:12px}
-    .slide .meta h4{margin:0 0 6px;font-weight:800}
-    .slide .meta p{margin:0;color:var(--muted);font-size:14px}
-    .carousel-controls{display:flex;gap:8px;margin-top:8px;justify-content:flex-end}
-    .ctrl{background:#fff;padding:6px 10px;border-radius:8px;border:0;cursor:pointer;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
-    section{padding:44px 20px}
-    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .service{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,20,40,0.04)}
-    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .project{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;background:#fff}
-    .project img{width:100%;height:220px;object-fit:cover}
-    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
-    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 8px 26px rgba(2,6,23,0.06);}
-    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #eef2f7;font-size:15px}
-    textarea{min-height:120px;resize:vertical}
-    .stars{display:flex;gap:6px;align-items:center}
-    .star{font-size:22px;cursor:pointer;color:#ddd}
-    .star.selected{color:gold}
-    .review{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
-    footer{padding:26px 20px;text-align:center;color:var(--muted)}
-    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:92;opacity:0;pointer-events:none;transition:opacity .2s}
-    .modal.open{opacity:1;pointer-events:auto}
-    .panel{background:#fff;border-radius:12px;max-width:920px;width:95%;padding:12px;overflow:auto}
-    .light-img{width:100%;height:auto;border-radius:8px}
-    .back-btn{background:rgba(0,0,0,0.06);padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
-    .lang-switch{display:flex;gap:8px;align-items:center}
-    .lang-btn{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#fff;padding:6px 8px;border-radius:8px;cursor:pointer;font-weight:700}
-    .lang-btn.active{background:#fff;color:var(--primary)}
-    @media (max-width:1100px){
-      .hero{grid-template-columns:1fr;gap:18px;padding:42px 18px}
-      .carousel{gap:8px}
-      .slide{min-width:240px;flex:0 0 240px}
-      .menu-grid{grid-template-columns:repeat(2,1fr)}
-      nav.primary{display:none}
-    }
-    @media (max-width:700px){
-      .menu-panel .menu-grid{grid-template-columns:1fr}
-      .projects .project img{height:160px}
-      .contact-grid{grid-template-columns:1fr}
-    }
-
-img, video { max-width:100%; height:auto; display:block; }
-html, body { -webkit-text-size-adjust:100%; }
-
-
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr !important; padding: 42px 16px !important; min-height: auto !important; }
-  .hero .right { margin-top: 18px; }
-}
-
-
-@media (max-width: 700px) {
-  .slide { min-width: 220px; flex: 0 0 220px; }
-  .slide img, .slide video { height: 140px; object-fit: cover; }
-  .carousel { gap: 8px; }
-  .services { grid-template-columns: 1fr 1fr; }
-  .projects { grid-template-columns: 1fr 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-
-  h1 { font-size: 26px; }
-  h2 { font-size: 20px; }
-  p, .muted { font-size: 15px; }
-
-
-  button, .btn-quote, .ctrl { min-height: 44px; padding: 10px 12px; touch-action: manipulation; }
-  html, body { overflow-x: hidden; }
-}
-
-@media (max-width: 1100px) {
-  .services { grid-template-columns: 1fr 1fr; }
-}
-
-.project img, .card img { width:100%; height:auto; object-fit:cover; }
-
-</style>
 </head>
 <body>
 
   <div class="topbar" role="banner" id="topbar">
     <div class="inner">
       <div class="brand">
-        <div class="logo" aria-hidden="true">Շ</div>
-        <div>
-          <div style="font-weight:800" data-i18n="brand.name">Շինարարություն</div>
+        <div class="logo" aria-hidden="true">
+         <img src="IMG-20260108-WA0000.jpg" alt="լոգո">
+      </div>
+          <div style="font-weight:800" data-i18n="brand.name">Շինարարություն</div> 
           <div style="font-size:12px;opacity:.95" data-i18n="brand.tagline">Շինարարություն և ճարտարապետություն</div>
         </div>
       </div>
@@ -198,7 +82,7 @@ html, body { -webkit-text-size-adjust:100%; }
         </div>
 
         <aside class="right container card">
-          <div style="font-weight:800; color: black" data-i18n="calc.title">Անմիջական հաշվիչ</div>
+          <div style="font-weight:800; color: black" data-i18n="calc.title">Անմիջական հաշվիչ (նախնակին գին)</div>
           <form id="quickCalc" style="margin-top:12px" onsubmit="return false">
             <input id="area" type="number" data-i18n-placeholder="calc.area" placeholder="մ²" />
             <select id="serviceType" style="margin-top:8px">
@@ -226,14 +110,17 @@ html, body { -webkit-text-size-adjust:100%; }
           <article class="service" data-media='{"type":"image","src":"https://images.unsplash.com/photo-1505842465776-3a45a2b6b4b9?w=1600&q=80&auto=format&fit=crop","title":"Design"}'>
             <h3 style="margin:0 0 6px;font-weight:800" data-i18n="service.design.title">Design & BIM</h3>
             <p class="muted" data-i18n="service.design.desc">2D/3D Design, BIM, structural engineering and energy optimization.</p>
+            <img src="նկար պոլ.jpeg" alt="nkar" class="img">
           </article>
           <article class="service" data-media='{"type":"video","src":"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4","poster":"https://images.unsplash.com/photo-1495502665773-8a8f0a20f6ad?w=900&q=60&auto=format&fit=crop","title":"Construction"}'>
             <h3 style="margin:0 0 6px;font-weight:800" data-i18n="service.construction.title">Construction</h3>
             <p class="muted" data-i18n="service.construction.desc">From foundations to finishes — end-to-end construction with strict QC.</p>
+            <img src="նկար բոչկա.jpg" alt="nkar" class="img">
           </article>
           <article class="service" data-media='{"type":"text","title":"Maintenance","text":"Maintenance & 24/7 support — long-term partnerships."}'>
             <h3 style="margin:0 0 6px;font-weight:800" data-i18n="service.maintenance.title">Maintenance</h3>
             <p class="muted" data-i18n="service.maintenance.desc">Post-handover maintenance, warranty & technical support.</p>
+            <img src="նկար էշ.jpg" alt="nkar" class="img">
           </article>
         </div>
       </div>
@@ -244,26 +131,26 @@ html, body { -webkit-text-size-adjust:100%; }
         <button class="back-btn" id="backFromProjects" data-i18n="back">← Հետ վերադառնալ</button>
         <h2 id="projectsTitle" style="margin-top:12px;font-weight:800" data-i18n="projects.title">Projects — Case Studies</h2>
         <p class="muted" data-i18n="projects.lead">Small selection of recent projects — click to open media & case details.</p>
-
+        
         <div class="projects" style="margin-top:18px">
-          <div class="project" data-src="https://images.unsplash.com/photo-1505842465776-3a45a2b6b4b9?w=1600&q=80&auto=format&fit=crop"><img loading="lazy" src="https://redgroup-public.s3.eu-central-1.amazonaws.com/developers/projects/366/photos/5-51Ke.jpg" alt="Residential"></div>
-          <div class="project" data-src="https://images.unsplash.com/photo-1495502665773-8a8f0a20f6ad?w=1600&q=80&auto=format&fit=crop"><img loading="lazy" src="https://energyagency.am/uploads/page/1534950957.jpg" alt="Solar plant"></div>
-          <div class="project" data-src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&auto=format&fit=crop"><img loading="lazy" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=60&auto=format&fit=crop" alt="Commercial"></div>
-        </div>
+          <img src="Դիզայն.jpg" alt="nkar" class="picture">
+          <img src="Շինարարություն.jpg" alt="nkar" class="picture">
+          <img src="քարտեզ.jpg" alt="nkar" class="picture">
       </div>
     </section>
 
     <section id="page-about" class="page" role="region" aria-labelledby="aboutTitle">
       <div class="container">
         <button class="back-btn" id="backFromAbout" data-i18n="back">← Հետ վերադառնալ</button>
-        <h2 id="aboutTitle" style="margin-top:12px;font-weight:800" data-i18n="about.title">About AutoBuild</h2>
-        <p class="muted" data-i18n="about.lead">AutoBuild combines engineering rigor with construction excellence.</p>
+        <h2 id="aboutTitle" style="margin-top:12px;font-weight:800" data-i18n="about.title">Շինարարական կայքի մասին</h2>
+        <p class="muted" data-i18n="about.lead">BUilding combines engineering rigor with construction excellence.</p>
         <div style="display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:18px;align-items:start">
           <div>
             <h3 style="font-weight:800" data-i18n="about.mission.title">Our mission</h3>
             <p class="muted" data-i18n="about.mission.desc">Delivering durable, efficient and safe buildings that stand the test of time.</p>
             <h4 style="margin-top:18px;font-weight:800" data-i18n="about.team.title">Team</h4>
             <p class="muted" data-i18n="about.team.desc">Experienced engineers, project managers, and certified contractors.</p>
+            <img src="ինֆո.jpg" alt="nkar" style="width: 400px; height: 100%;border-radius: 8px;">
           </div>
           <div class="card" style="overflow:hidden">
             <img src="https://www.ere.net/_next/image?url=https%3A%2F%2Fapi.eremedia.com%2Fwp-content%2Fuploads%2F2018%2F02%2Fteambuilding.jpg&w=3840&q=75" alt="team" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:8px" />
@@ -281,7 +168,7 @@ html, body { -webkit-text-size-adjust:100%; }
         <div class="contact-grid" style="margin-top:16px">
           <div>
             <h3 style="font-weight:800" data-i18n="contact.office.title">Office</h3>
-            <p class="muted" data-i18n="contact.office.info">Address ·  info.adar.llc@gmail.com · Հեռախոսահամար · +374 98 841920</p>
+            <p class="muted" data-i18n="contact.office.info">Address ·  info.adar.llc@gmail.com · Հեռախոսահամար · +374 96 837878</p>
             <div style="margin-top:12px">
               <div class="small" data-i18n="contact.hours.label">Working hours</div>
               <div class="muted" data-i18n="contact.hours.value">Mon–Fri: 9:00–18:00</div>
@@ -353,11 +240,26 @@ html, body { -webkit-text-size-adjust:100%; }
 
   </main>
 
+<button class="chat-fab" id="chatFab">💬</button>
+
+<div class="chat-bot closed" id="chatBot">
+  <div class="chat-header">
+    <span>Օնլայն օգնական</span>
+    <button id="chatClose">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-footer">
+    <input id="chatInput" type="text" placeholder="Գրեք ձեր հարցը…" />
+    <button id="chatSend">Ուղարկել</button>
+  </div>
+</div>
+
+
   <footer>
     <div class="container">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
         <div class="small" data-i18n="footer.copyright">© <strong>Շինարարություն</strong> – Բոլոր իրավունքները պաշտպանված են</div>
-        <div class="small muted" data-i18n="footer.contacts">Էլ Հասցե · info.adar.llc@gmail.com · Հեռախոսահամար · +374 98 841920</div>
+        <div class="small muted" data-i18n="footer.contacts">Էլ Հասցե · info.adar.llc@gmail.com · Հեռախոսահամար · +374 96 837878</div>
       </div>
     </div>
   </footer>
@@ -370,661 +272,26 @@ html, body { -webkit-text-size-adjust:100%; }
     </div>
   </div>
 
-
-<script>
-
-const API_ENDPOINT = ''; 
-const AUTO_PLAY_MS = 4000; 
-
-const availableLangs = ['hy','en','ru'];
-const defaultLang = 'hy';
-let currentLang = localStorage.getItem('autobuild_lang') || defaultLang;
-
-const i18n = {
-  hy: {
-    'brand.name':'Շինարարություն',
-    'brand.tagline':'Շինարարություն և ճարտարապետություն',
-    'nav.home':'Գլխավոր էջ','nav.services':'Ծառայություններ','nav.projects':'Նախագծեր','nav.about':'Մեր մասին','nav.contact':'Կապ','nav.reviews':'Կարծիքներ',
-    'menu.design':'Դիզայն և BIM Բնակելի','menu.residential':'Բնակելի տներ','menu.commercial':'Առևտրային','menu.team':'Թիմ','menu.construction':'Շինարարություն','menu.beforeafter':'Մինչև/Հետո','menu.certs':'Վկայականներ','menu.contact':'Կապ վաճառքի բաժնի հետ','menu.maintenance':'Ծառայություն','menu.infra':'Ենթակառուցվածք','menu.values':'Արժեքներ','menu.reviews':'Հաճախորդների կարծիքներ',
-    'home.kicker':'Շինարարական լուծումներ','home.title':'Կառուցենք Ձեր ապագան — ժամանակին և որակով','home.lead':'Մեկ թիմ՝ ամբողջական ծառայություններով՝ նախագծումից մինչև հանձնում․ նոր ժամանակների որակ, անվտանգություն և երաշխիք։',
-    'carousel.prev':'Նախորդ','carousel.next':'Հաջորդ',
-    'calc.title':'Անմիջական հաշվիչ','calc.area':'մ²','service.build':'Ընդհանուր շինարարություն','service.reno':'Վերանորոգում','service.full':'Նախագիծ + իրականացում','calc.button':'Հաշվել','calc.details':'Մանրամասն','calc.result':'Ընդհանուր արժեք՝',
-    'back':'← Հետ վերադառնալ',
-    'services.title':'Ծառայություններ — Մենք կարող ենք','services.lead':'Մենք ծառայություններ ենք տրամադրում ամբողջական սպեկտրում։',
-    'service.design.title':'Դիզայն ու BIM','service.design.desc':'2D/3D դեզայն, BIM և էներգետիկ օպտիմիզացում։',
-    'service.construction.title':'Շինարարություն','service.construction.desc':'Նետ մինչև ավարտ — ամբողջական շինարարություն և որակի վերահսկում։',
-    'service.maintenance.title':'Ծառայություն','service.maintenance.desc':'Վերահսկում և տեխնիկական աջակցություն։',
-    'projects.title':'Նախագծեր — Վիճակագրություն','projects.lead':'Վերջին նախագծերի ընտրանու ցուցադրում։',
-    'about.title':'Մեր մասին','about.lead':'AutoBuild միաձուլում է ճարտարագիտական խստությունը և շինարարական գերազանցությունը։',
-    'about.mission.title':'Մեր առաքելությունը','about.mission.desc':'Հետևողական, արդյունավետ և անվտանգ շենքեր։',
-    'about.team.title':'Դասակարգված թիմ','about.team.desc':'Ճանճված ինժեներներ և պրոֆեսիոնալներ։',
-    'contact.title':'Կապ','contact.lead':'Լրացրեք ձևը և մենք կպատասխանենք առաջարկով։',
-    'contact.office.title':'Գործասենյակ','contact.office.info':'Հասցե · info.adar.llc@gmail.com · +374 98 841920',
-    'contact.hours.label':'Աշխատանքային ժամեր','contact.hours.value':'Կիր–Ուրբ: 9:00–18:00',
-    'contact.form.name':'Անուն','contact.form.name.ph':'Անուն','contact.form.email':'Էլ. հասցե','contact.form.email.ph':'example@mail.com','contact.form.phone':'Հեռախոս','contact.form.phone.ph':'+374 ...','contact.form.msg':'Նամակ','contact.form.msg.ph':'Թողեք մանրամասները...',
-    'contact.form.send':'Ուղարկել','contact.form.reset':'Հետարկել',
-    'reviews.title':'Հաճախորդների կարծիքներ','reviews.lead':'Հատկացրեք վարկանիշ և մեկնաբանություն։',
-    'reviews.avg':'Միջին։','reviews.count':'կարծիք','reviews.form.title':'Թողնել կարծիք','reviews.form.lead':'Գնահատեք 1–5 աստղ և գրեք մեկնաբանություն։',
-    'reviews.form.name.ph':'Ձեր անունը','reviews.form.comment.ph':'Ձեր մեկնաբանությունը','reviews.form.send':'Արտահնել','reviews.form.clear':'Մաքրել',
-    'footer.copyright':'© Շինարարություն – Բոլոր իրավունքները պաշտպանված են','footer.contacts':'Էլ Հասցե · info.adar.llc@gmail.com · Հեռախոսահամար · +374 98 841920',
-    'noReviewsYet':'Մինչ այժմ կարծիքներ չկան — եղեք առաջինը։',
-    'demoFormNotice':'Դեմո ռեժիմ — ձևը չի ուղարկվել (API_ENDPOINT չի նշված).',
-    'sendError':'Ուղարկման սխալ, փորձեք ավելի ուշ կամ զանգահարեք: +374 00 000000',
-    "calc.save": "Անցնել",
-    "calc.details": "Մանրամասներ"
-  },
-  en: {
-    'brand.name':'Construction','brand.tagline':'Construction & Architecture',
-    'nav.home':'Home','nav.services':'Services','nav.projects':'Projects','nav.about':'About','nav.contact':'Contact','nav.reviews':'Reviews',
-    'menu.design':'Design & BIM','menu.residential':'Residential','menu.commercial':'Commercial','menu.team':'Team','menu.construction':'Construction','menu.beforeafter':'Before/After','menu.certs':'Certificates','menu.contact':'Sales contact','menu.maintenance':'Maintenance','menu.infra':'Infrastructure','menu.values':'Values','menu.reviews':'Customer reviews',
-    'home.kicker':'Construction solutions','home.title':'We build your future — on time & with quality','home.lead':'One team — full services from design to handover. Quality, safety, warranty.',
-    'carousel.prev':'Prev','carousel.next':'Next',
-    'calc.title':'Quick calculator','calc.area':'m²','service.build':'General construction','service.reno':'Renovation','service.full':'Design + execution','calc.button':'Calculate','calc.details':'Details','calc.result':'Total cost:',
-    'back':'← Back',
-    'services.title':'Services — Our Capabilities','services.lead':'We provide a full spectrum of services.',
-    'service.design.title':'Design & BIM','service.design.desc':'2D/3D design, BIM and energy optimization.',
-    'service.construction.title':'Construction','service.construction.desc':'Foundations to finishes — end-to-end construction with QC.',
-    'service.maintenance.title':'Maintenance','service.maintenance.desc':'Post-handover maintenance and support.',
-    'projects.title':'Projects — Case Studies','projects.lead':'Small selection of recent projects.',
-    'about.title':'About AutoBuild','about.lead':'AutoBuild combines engineering rigor with construction excellence.',
-    'about.mission.title':'Our mission','about.mission.desc':'Delivering durable, efficient and safe buildings.',
-    'about.team.title':'Team','about.team.desc':'Experienced engineers and certified contractors.',
-    'contact.title':'Contact','contact.lead':'Fill the form and we\'ll reply with a tailored proposal.',
-    'contact.office.title':'Office','contact.office.info':'Address · info.adar.llc@gmail.com · +374 98 841920',
-    'contact.hours.label':'Working hours','contact.hours.value':'Mon–Fri: 9:00–18:00',
-    'contact.form.name':'Name','contact.form.name.ph':'Name','contact.form.email':'Email','contact.form.email.ph':'example@mail.com','contact.form.phone':'Phone','contact.form.phone.ph':'+374 ...','contact.form.msg':'Message','contact.form.msg.ph':'Project details...',
-    'contact.form.send':'Send','contact.form.reset':'Reset',
-    'reviews.title':'Visitor Reviews','reviews.lead':'Leave your rating and feedback — helps others choose the right partner.',
-    'reviews.avg':'Average:','reviews.count':'reviews','reviews.form.title':'Leave a review','reviews.form.lead':'Rate 1–5 stars and add a short comment.',
-    'reviews.form.name.ph':'Your name','reviews.form.comment.ph':'Your comment','reviews.form.send':'Submit review','reviews.form.clear':'Clear',
-    'footer.copyright':'© Construction — All rights reserved','footer.contacts':'Email · info.adar.llc@gmail.com · Phone · +374 98 841920',
-    'noReviewsYet':'No reviews yet — be the first.',
-    'demoFormNotice':'Demo mode — form not sent (API_ENDPOINT empty).',
-    'sendError':'Send error, try later or call: +374 00 000000',
-    "calc.save": "Next",
-    "calc.details": "Details"
-  },
-  ru: {
-    'brand.name':'Строительство','brand.tagline':'Строительство и архитектура',
-    'nav.home':'Главная','nav.services':'Услуги','nav.projects':'Проекты','nav.about':'О нас','nav.contact':'Контакты','nav.reviews':'Отзывы',
-    'menu.design':'Дизайн & BIM','menu.residential':'Жилые','menu.commercial':'Коммерческие','menu.team':'Команда','menu.construction':'Строительство','menu.beforeafter':'До/После','menu.certs':'Сертификаты','menu.contact':'Связь с продажами','menu.maintenance':'Обслуживание','menu.infra':'Инфраструктура','menu.values':'Ценности','menu.reviews':'Отзывы клиентов',
-    'home.kicker':'Строительные решения','home.title':'Мы строим ваше будущее — вовремя и качественно','home.lead':'Одна команда — полный цикл от дизайна до сдачи. Качество, безопасность, гарантия.',
-    'carousel.prev':'Назад','carousel.next':'Вперед',
-    'calc.title':'Быстрый калькулятор','calc.area':'м²','service.build':'Общее строительство','service.reno':'Ремонт','service.full':'Проект + реализация','calc.button':'Рассчитать','calc.details':'Подробнее','calc.result':'Общая стоимость:',
-    'back':'← Назад',
-    'services.title':'Услуги — Наши возможности','services.lead':'Мы предоставляем полный спектр услуг.',
-    'service.design.title':'Дизайн и BIM','service.design.desc':'2D/3D дизайн, BIM и оптимизация энергии.',
-    'service.construction.title':'Строительство','service.construction.desc':'От фундамента до отделки — полный цикл строительства с контролем качества.',
-    'service.maintenance.title':'Обслуживание','service.maintenance.desc':'Гарантийное обслуживание и техподдержка.',
-    'projects.title':'Проекты — Кейсы','projects.lead':'Небольшой выбор недавних проектов.',
-    'about.title':'О AutoBuild','about.lead':'AutoBuild сочетает инженерную строгость и строительное мастерство.',
-    'about.mission.title':'Наша миссия','about.mission.desc':'Создавать прочные, эффективные и безопасные здания.',
-    'about.team.title':'Команда','about.team.desc':'Опытные инженеры и сертифицированные подрядчики.',
-    'contact.title':'Контакты','contact.lead':'Заполните форму — мы ответим с предложением.',
-    'contact.office.title':'Офис','contact.office.info':'Адрес · info.adar.llc@gmail.com · +374 98 841920',
-    'contact.hours.label':'Часы работы','contact.hours.value':'Пн–Пт: 9:00–18:00',
-    'contact.form.name':'Имя','contact.form.name.ph':'Имя','contact.form.email':'Email','contact.form.email.ph':'example@mail.com','contact.form.phone':'Телефон','contact.form.phone.ph':'+374 ...','contact.form.msg':'Сообщение','contact.form.msg.ph':'Детали проекта...',
-    'contact.form.send':'Отправить','contact.form.reset':'Сброс',
-    'reviews.title':'Отзывы','reviews.lead':'Оставьте рейтинг и отзыв — это поможет другим.',
-    'reviews.avg':'Средний:','reviews.count':'отзывов','reviews.form.title':'Оставить отзыв','reviews.form.lead':'Оцените 1–5 звёзд и добавьте комментарий.',
-    'reviews.form.name.ph':'Ваше имя','reviews.form.comment.ph':'Ваш комментарий','reviews.form.send':'Отправить отзыв','reviews.form.clear':'Очистить',
-    'footer.copyright':'© Строительство — Все права защищены','footer.contacts':'Email · info.adar.llc@gmail.com · Телефон · +374 98 841920',
-    'noReviewsYet':'Пока нет отзывов — будьте первым.',
-    'demoFormNotice':'Демо-режим — форма не отправлена (API_ENDPOINT пуст).',
-    'sendError':'Ошибка отправки, попробуйте позже или позвоните: +374 00 000000',
-    "calc.save": "Следушый",
-    "calc.details": "Подробнее"
-  }
-};
-
-const slidesByLang = {
-  hy: [
-    {type:'image', title:'Բնակելի համալիր', subtitle:'Հարմարավետություն և դիզայն', src:'https://www.rustomjee.com/blog/wp-content/uploads/2024/08/IMAGE_1000-X-374-copy.jpg'},
-    {type:'image', title:'Արևային էլեկտրակայան', subtitle:'Կայուն էներգիա', src:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8k-Vm1DbZDJFCvkpdhbT5lWGsMfrW1e_jKA&s'},
-    {type:'video', title:'Կայքի առաջընթաց', subtitle:'Ժամանակաչափի նկարահանում', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&q=60&auto=format&fit=crop'},
-    {type:'text', title:'Աշխատանքային փորձ', subtitle:'3 տարվա', text:'3+ տարի ճարտարագիտական ​​խստություն, գերազանց առաքում։'},
-    {type:'image', title:'Առևտրային կենտրոն', subtitle:'Խելացի տարածքներ', src:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&auto=format&fit=crop'}
-  ],
-  en: [
-    {type:'image', title:'Residential Complex', subtitle:'Comfort & design', src:'https://www.rustomjee.com/blog/wp-content/uploads/2024/08/IMAGE_1000-X-374-copy.jpg'},
-    {type:'image', title:'Solar Plant', subtitle:'Sustainable energy', src:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8k-Vm1DbZDJFCvkpdhbT5lWGsMfrW1e_jKA&s'},
-    {type:'video', title:'Site progress', subtitle:'Time-lapse footage', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&q=60&auto=format&fit=crop'},
-    {type:'text', title:'Work experience', subtitle:'3 years', text:'3+ years of engineering rigor and excellent delivery.'},
-    {type:'image', title:'Commercial Center', subtitle:'Smart spaces', src:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&auto=format&fit=crop'}
-  ],
-  ru: [
-    {type:'image', title:'Жилой комплекс', subtitle:'Комфорт и дизайн', src:'https://www.rustomjee.com/blog/wp-content/uploads/2024/08/IMAGE_1000-X-374-copy.jpg'},
-    {type:'image', title:'Солнечная станция', subtitle:'Устойчивая энергия', src:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8k-Vm1DbZDJFCvkpdhbT5lWGsMfrW1e_jKA&s'},
-    {type:'video', title:'Прогресс на площадке', subtitle:'Таймлапс', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&q=60&auto=format&fit=crop'},
-    {type:'text', title:'Опыт работы', subtitle:'3 года', text:'3+ года инженерной строгости и отличной реализации.'},
-    {type:'image', title:'Торговый центр', subtitle:'Современные пространства', src:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&auto=format&fit=crop'}
-  ]
-};
-
-function translatePage(lang){
-  const dict = i18n[lang] || {};
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.dataset.i18n;
-    if(!key) return;
-    const txt = dict[key] ?? '';
-    el.innerHTML = txt;
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-    const key = el.dataset.i18nPlaceholder;
-    const txt = dict[key] ?? '';
-    if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = txt;
-    else el.setAttribute('placeholder', txt);
-  });
-  document.querySelectorAll('[data-i18n-value]').forEach(el=>{
-    const key = el.dataset.i18nValue;
-    const txt = dict[key] ?? '';
-    el.value = txt;
-  });
-  document.querySelectorAll('option[data-i18n-option]').forEach(opt=>{
-    const key = opt.dataset.i18nOption;
-    const txt = dict[key] ?? '';
-    opt.textContent = txt;
-  });
-  const reviewsList = document.getElementById('reviewsList');
-  if(reviewsList && (!reviewsList.children || reviewsList.children.length===0)){
-    reviewsList.innerHTML = `<div class="muted">${dict['noReviewsYet'] ?? ''}</div>`;
-  }
-  document.documentElement.lang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b=>{
-    const is = b.dataset.lang === lang;
-    b.classList.toggle('active', is);
-    b.setAttribute('aria-pressed', is ? 'true' : 'false');
-  });
-  renderSlides(lang);
-}
-
-const carousel = document.getElementById('carousel');
-function renderSlides(lang){
-  const arr = slidesByLang[lang] || slidesByLang[defaultLang];
-  carousel.innerHTML = '';
-  arr.forEach((s,i)=>{
-    const el = document.createElement('div'); el.className='slide'; el.dataset.index = i;
-    if(s.type==='image'){
-      const img = document.createElement('img'); img.src = s.src; img.alt = s.title || 'slide';
-      el.appendChild(img);
-    } else if(s.type==='video'){
-      const vid = document.createElement('video'); vid.src = s.src; vid.poster = s.poster||''; vid.muted=true; vid.playsInline=true; vid.loop=true; vid.preload='metadata';
-      el.appendChild(vid);
-    } else if(s.type==='text'){
-      const wrap = document.createElement('div'); wrap.style.padding='18px';
-      wrap.innerHTML = `<div style="font-weight:800;font-size:18px">${escapeHtml(s.title)}</div><div style="color:var(--muted);margin-top:6px">${escapeHtml(s.subtitle)}</div><p style="margin-top:12px">${escapeHtml(s.text||'')}</p>`;
-      el.appendChild(wrap);
-    }
-    const meta = document.createElement('div'); meta.className='meta'; meta.innerHTML = `<h4>${escapeHtml(s.title||'')}</h4><p>${escapeHtml(s.subtitle||'')}</p>`;
-    el.appendChild(meta);
-    carousel.appendChild(el);
-  });
-  setTimeout(()=> {
-    slideEls = Array.from(document.querySelectorAll('.slide'));
-    const total = slideEls.reduce((s,el)=> s + el.offsetWidth + 10, 0);
-    carousel.style.width = total + 'px';
-    slideIndex = 0;
-    updateCarousel();
-  }, 80);
-}
-
-let slideIndex = 0;
-let slideEls = Array.from(document.querySelectorAll('.slide'));
-function updateCarousel(){
-  if(!slideEls.length) return;
-  const gap = 10;
-  const slideWidth = slideEls[0].offsetWidth + gap;
-  const offset = -(slideIndex * slideWidth);
-  carousel.style.transform = `translateX(${offset}px)`;
-  slideEls.forEach((el, idx)=>{
-    const v = el.querySelector('video');
-    if(v){
-      if(idx >= slideIndex && idx < slideIndex + Math.ceil(window.innerWidth / slideWidth)) v.play().catch(()=>{});
-      else v.pause();
-    }
-  });
-}
-function nextSlide(){ slideIndex = (slideIndex + 1) % slideEls.length; updateCarousel(); }
-function prevSlide(){ slideIndex = (slideIndex - 1 + slideEls.length) % slideEls.length; updateCarousel(); }
-document.getElementById('nextSlide').addEventListener('click', ()=> { nextSlide(); resetAutoplay(); });
-document.getElementById('prevSlide').addEventListener('click', ()=> { prevSlide(); resetAutoplay(); });
-
-let autoplayTimer = null;
-function startAutoplay(){ stopAutoplay(); autoplayTimer = setInterval(nextSlide, AUTO_PLAY_MS); }
-function stopAutoplay(){ if(autoplayTimer){ clearInterval(autoplayTimer); autoplayTimer=null; } }
-function resetAutoplay(){ stopAutoplay(); setTimeout(startAutoplay, AUTO_PLAY_MS); }
-
-carousel.addEventListener('mouseenter', ()=> stopAutoplay());
-carousel.addEventListener('mouseleave', ()=> startAutoplay());
-window.addEventListener('resize', ()=> setTimeout(()=> {
-  slideEls = Array.from(document.querySelectorAll('.slide'));
-  const total = slideEls.reduce((s,el)=> s + el.offsetWidth + 10, 0); carousel.style.width = total + 'px'; updateCarousel();
-}, 120));
-
-const topbar = document.getElementById('topbar');
-const menuPanel = document.getElementById('menuPanel');
-let menuTimeout = null;
-function openMenu(){ if(menuTimeout) clearTimeout(menuTimeout); menuPanel.classList.add('open'); menuPanel.setAttribute('aria-hidden','false'); }
-function closeMenuSoon(){ if(menuTimeout) clearTimeout(menuTimeout); menuTimeout = setTimeout(()=> { menuPanel.classList.remove('open'); menuPanel.setAttribute('aria-hidden','true'); }, 200); }
-topbar.addEventListener('mouseenter', openMenu);
-topbar.addEventListener('mouseleave', closeMenuSoon);
-menuPanel.addEventListener('mouseenter', openMenu);
-menuPanel.addEventListener('mouseleave', closeMenuSoon);
-
-const primaryNav = document.getElementById('primaryNav');
-function adaptMobileNav(){ if(getComputedStyle(primaryNav).display === 'none'){ 
-  if(!document.getElementById('mobileToggle')){
-    const btn = document.createElement('button'); btn.id='mobileToggle'; btn.textContent='Menu'; btn.style.marginLeft='10px';
-    btn.onclick = ()=> menuPanel.classList.toggle('open');
-    topbar.querySelector('.inner').appendChild(btn);
-  }
-} }
-window.addEventListener('resize', adaptMobileNav);
-adaptMobileNav();
-
-const scrollProgress = document.getElementById('scrollProgress');
-function updateProgress(){ const doc=document.documentElement; const pct = doc.scrollHeight>doc.clientHeight ? (doc.scrollTop / (doc.scrollHeight - doc.clientHeight))*100 : 0; scrollProgress.style.width = pct + '%'; }
-document.addEventListener('scroll', updateProgress, {passive:true}); window.addEventListener('resize', updateProgress); updateProgress();
-
-const projects = document.querySelectorAll('.project');
-const mediaLightbox = document.getElementById('mediaLightbox');
-const mediaContainer = document.getElementById('mediaContainer');
-document.getElementById('closeMedia').addEventListener('click', ()=> { mediaLightbox.classList.remove('open'); mediaLightbox.setAttribute('aria-hidden','true'); mediaContainer.innerHTML=''; });
-projects.forEach(p=> p.addEventListener('click', ()=> {
-  const src = p.dataset.src || p.querySelector('img').src;
-  mediaContainer.innerHTML = `<img class="light-img" src="${escapeHtml(src)}" alt="project">`;
-  mediaLightbox.classList.add('open'); mediaLightbox.setAttribute('aria-hidden','false');
-}));
-
-document.getElementById('calcBtn').addEventListener('click', ()=> {
-  const area = Math.max(0, Number(document.getElementById('area').value) || 0);
-  const type = document.getElementById('serviceType').value;
-  let rateAMD = 180000; 
-  if(type === 'reno') rateAMD = 120000; 
-  if(type === 'full') rateAMD = 250000; 
+<div id="floatingReviews" class="reviews-floating collapsed" aria-hidden="false">
+  <div class="floating-head">
+    <div>Visitor Reviews</div>
+    <div>
+      <button id="reviewsToggle" class="toggle-btn" title="Toggle reviews">☰</button>
+    </div>
+  </div>
+  <div class="floating-body">
+    <div id="floatingReviewsList" class="floating-list">
+      <div class="muted">—</div>
+    </div>
+  </div>
+</div>
 
 
-  const totalAMD = Math.round(area * rateAMD);
-  const USD_RATE = 410; 
-  const RUB_RATE = 4.5; 
 
-  const totalUSD = (totalAMD / USD_RATE).toFixed(2);
-  const totalRUB = Math.round(totalAMD / RUB_RATE);
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="script.js"></script>
 
-  const dict = i18n[currentLang] || i18n[defaultLang];
-  const resultPrefix = dict['calc.result'] ?? '';
-
-  document.getElementById('calcVal').innerHTML = totalAMD
-    ? `
-      <strong>${totalAMD.toLocaleString()} AMD</strong><br>
-      <span style="color:var(--muted)">
-        ${(totalUSD)} USD • ${totalRUB.toLocaleString()} RUB
-      </span>
-    `
-    : '—';
-  const calcResultEl = document.getElementById('calcResult');
-  if(calcResultEl) calcResultEl.firstChild && calcResultEl.firstChild.nodeValue === null ? calcResultEl.innerHTML = `${resultPrefix} <strong id="calcVal">${totalAMD? totalAMD.toLocaleString() + ' AMD' : '—'}</strong>` : null;
-});
-
-const cfSend = document.getElementById('cfSend'), cfReset = document.getElementById('cfReset'), cfStatus = document.getElementById('cfStatus');
-let lastSent = 0;
-function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
-cfSend.addEventListener('click', async ()=> {
-  const name = document.getElementById('cfName').value.trim();
-  const email = document.getElementById('cfEmail').value.trim();
-  const phone = document.getElementById('cfPhone').value.trim();
-  const message = document.getElementById('cfMsg').value.trim();
-  const dict = i18n[currentLang] || i18n[defaultLang];
-  if(name.length < 2){ cfStatus.textContent = dict['contact.form.name'] ? dict['contact.form.name'] + ' ' + 'is required.' : 'Enter your name.'; cfStatus.style.color='crimson'; return; }
-  if(!email && !phone){ cfStatus.textContent='Please leave email or phone.'; cfStatus.style.color='crimson'; return; }
-  if(email && !validEmail(email)){ cfStatus.textContent='Email format invalid.'; cfStatus.style.color='crimson'; return; }
-  if(Date.now() - lastSent < 10000){ cfStatus.textContent='Please wait a few seconds before sending again.'; cfStatus.style.color='crimson'; return; }
-
-  cfSend.disabled = true; cfSend.textContent='Sending...'; cfStatus.textContent=''; cfStatus.style.color='var(--muted)'; lastSent = Date.now();
-  const payload = { name, email, phone, message };
-
-  try{
-    if(API_ENDPOINT){
-      const r = await fetch(API_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-      const j = await r.json();
-      if(!r.ok) throw new Error(j?.error || 'Network error');
-      cfStatus.textContent = 'Thanks — we received your request.';
-      cfStatus.style.color = 'green';
-      document.getElementById('contactForm').reset();
-    } else {
-      await new Promise(r=>setTimeout(r,900));
-      cfStatus.textContent = (i18n[currentLang] || i18n[defaultLang])['demoFormNotice'] || 'Demo mode — form not sent (API_ENDPOINT empty).';
-      cfStatus.style.color='green';
-    }
-  }catch(err){
-    console.error(err);
-    cfStatus.textContent = (i18n[currentLang] || i18n[defaultLang])['sendError'] || 'Send error, try later or call: +374 00 000000'; cfStatus.style.color='crimson';
-  } finally {
-    cfSend.disabled=false; cfSend.textContent='Send';
-    cfSend.disabled=true; setTimeout(()=> cfSend.disabled=false, 10000);
-  }
-});
-cfReset.addEventListener('click', ()=> { document.getElementById('contactForm').reset(); cfStatus.textContent=''; });
-
-const rvStatus = document.getElementById('rvStatus'), reviewsList = document.getElementById('reviewsList'), avgRating = document.getElementById('avgRating'), reviewsCount = document.getElementById('reviewsCount');
-let selectedStar = 0;
-document.querySelectorAll('#starPicker .star').forEach(s=>{
-  s.addEventListener('mouseenter', ()=> {
-    const v = Number(s.dataset.value);
-    highlightStars(v);
-  });
-  s.addEventListener('mouseleave', ()=> highlightStars(selectedStar));
-  s.addEventListener('click', ()=> { selectedStar = Number(s.dataset.value); highlightStars(selectedStar); });
-});
-function highlightStars(v){
-  document.querySelectorAll('#starPicker .star').forEach(s=> { s.classList.toggle('selected', Number(s.dataset.value) <= v); });
-}
-document.getElementById('rvClear').addEventListener('click', ()=> { selectedStar =0; highlightStars(0); document.getElementById('rvName').value=''; document.getElementById('rvComment').value=''; rvStatus.textContent=''; });
-
-function loadReviews(){
-  const raw = localStorage.getItem('autobuild_reviews') || '[]';
-  try{
-    const arr = JSON.parse(raw);
-    reviewsList.innerHTML = '';
-    if(arr.length===0) reviewsList.innerHTML = `<div class="muted">${(i18n[currentLang] || i18n[defaultLang])['noReviewsYet']}</div>`;
-    arr.slice().reverse().forEach(r=>{
-      const el = document.createElement('div'); el.className='review';
-      el.innerHTML = `<div style="display:flex;justify-content:space-between"><strong>${escapeHtml(r.name)}</strong><div>${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div><div style="margin-top:8px;color:var(--muted)">${escapeHtml(r.comment)}</div><div style="margin-top:6px;font-size:12px;color:var(--muted)">${new Date(r.ts).toLocaleString()}</div>`;
-      reviewsList.appendChild(el);
-    });
-
-    const total = arr.reduce((s,x)=> s + (x.rating||0), 0);
-    const avg = arr.length ? (total / arr.length) : 0;
-    avgRating.textContent = avg ? avg.toFixed(1) + ' / 5' : '—';
-    reviewsCount.textContent = arr.length;
-  }catch(e){ console.error('reviews parse error', e); reviewsList.innerHTML = '<div class="muted">Error loading reviews.</div>'; }
-}
-loadReviews();
-
-document.getElementById('rvSend').addEventListener('click', ()=> {
-  const name = (document.getElementById('rvName').value||'').trim();
-  const comment = (document.getElementById('rvComment').value||'').trim();
-  const dict = i18n[currentLang] || i18n[defaultLang];
-  if(!selectedStar){ rvStatus.textContent=(dict['reviews.form.lead'] || 'Please select a star rating.'); rvStatus.style.color='crimson'; return; }
-  if(name.length < 2){ rvStatus.textContent=(dict['contact.form.name'] || 'Please enter your name.'); rvStatus.style.color='crimson'; return; }
-  const last = Number(localStorage.getItem('autobuild_last_review_ts') || '0');
-  if(Date.now() - last < 30000){ rvStatus.textContent='Please wait before submitting another review.'; rvStatus.style.color='crimson'; return; }
-  const raw = localStorage.getItem('autobuild_reviews') || '[]';
-  const arr = JSON.parse(raw);
-  const rec = { name: name, comment: comment, rating: selectedStar, ts: Date.now() };
-  arr.push(rec);
-  localStorage.setItem('autobuild_reviews', JSON.stringify(arr));
-  localStorage.setItem('autobuild_last_review_ts', Date.now().toString());
-  rvStatus.textContent = (dict['reviews.form.send'] ? 'Thanks — your review is posted.' : 'Thanks — your review is posted.');
-  rvStatus.style.color = 'green';
-  document.getElementById('rvName').value=''; document.getElementById('rvComment').value=''; selectedStar=0; highlightStars(0);
-  loadReviews();
-});
-
-function escapeHtml(s){ return String(s||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
-
-document.querySelectorAll('.lang-btn').forEach(b=>{
-  b.addEventListener('click', ()=>{
-    const l = b.dataset.lang;
-    if(!availableLangs.includes(l)) return;
-    currentLang = l;
-    localStorage.setItem('autobuild_lang', l);
-    translatePage(l);
-    loadReviews();
-  });
-});
-
-const pages = ['home','services','projects','about','contact','reviews'];
-function showPage(slug, push=true){
-  pages.forEach(p=> document.getElementById('page-' + p).classList.remove('active'));
-  const node = document.getElementById('page-' + slug);
-  if(!node) return;
-  node.classList.add('active');
-  const dict = i18n[currentLang] || i18n[defaultLang];
-  const navKey = 'nav.' + slug;
-  const label = dict[navKey] || (slug.charAt(0).toUpperCase()+slug.slice(1));
-  document.title = `Auto Build — ${label}`;
-  if(push) history.pushState({page:slug}, '', (slug==='home' ? '/' : '/' + slug));
-  window.scrollTo({top: document.querySelector('.hero-ghost') ? document.querySelector('.hero-ghost').offsetTop : 0, behavior:'smooth'});
-}
-window.addEventListener('popstate', (e)=> {
-  const state = e.state && e.state.page ? e.state.page : 'home';
-  showPage(state, false);
-});
-document.querySelectorAll('[data-page]').forEach(a=> a.addEventListener('click', (ev)=>{ ev.preventDefault(); const p = a.dataset.page; showPage(p); }));
-
-document.getElementById('backFromServices').addEventListener('click', ()=> history.back());
-document.getElementById('backFromProjects').addEventListener('click', ()=> history.back());
-document.getElementById('backFromAbout').addEventListener('click', ()=> history.back());
-document.getElementById('backFromContact').addEventListener('click', ()=> history.back());
-document.getElementById('backFromReviews').addEventListener('click', ()=> history.back());
-
-(function boot(){
-  const path = location.pathname.replace(/^\//,'') || 'home';
-  const candidate = pages.includes(path) ? path : 'home';
-  translatePage(currentLang);
-  renderSlides(currentLang);
-  slideEls = Array.from(document.querySelectorAll('.slide'));
-  const total = slideEls.reduce((s,el)=> s + el.offsetWidth + 10, 0);
-  carousel.style.width = total + 'px';
-  updateCarousel();
-  startAutoplay();
-  showPage(candidate, false);
-})();
-
-carousel.addEventListener('keydown', (e)=> {
-  if(e.key === 'ArrowLeft') prevSlide();
-  if(e.key === 'ArrowRight') nextSlide();
-});
-
-document.addEventListener('visibilitychange', ()=> { if(document.hidden) stopAutoplay(); else startAutoplay(); });
-
-(function enhanceMobileToggle(){
-  const btn = document.getElementById('mobileToggle');
-  if(btn){
-    btn.innerHTML = '☰';
-    btn.style.fontSize = '20px';
-    btn.style.background = 'transparent';
-    btn.style.color = '#fff';
-    btn.style.border = '0';
-    btn.style.padding = '6px 10px';
-    btn.style.cursor = 'pointer';
-    btn.setAttribute('aria-label','Open menu');
-  }
-})();
-
-
-(function(){
-  document.addEventListener('DOMContentLoaded', ()=> {
-    if(typeof availableLangs === 'undefined') window.availableLangs = ['hy','en','ru'];
-    if(typeof defaultLang === 'undefined') window.defaultLang = 'hy';
-    if(typeof currentLang === 'undefined') window.currentLang = localStorage.getItem('autobuild_lang') || window.defaultLang;
-
-    const quickForm = document.getElementById('quickCalc');
-    const calcBtn = document.getElementById('calcBtn');
-    const calcResultEl = document.getElementById('calcResult');
-    const calcValEl = () => document.getElementById('calcVal');
-    const areaInput = document.getElementById('area');
-    const serviceSel = document.getElementById('serviceType');
-    if(quickForm){
-      quickForm.addEventListener('submit', function(e){
-        e.preventDefault();
-      }, {passive:false});
-    }
-    if(calcBtn && calcBtn.tagName === 'BUTTON'){
-      try { calcBtn.type = 'button'; } catch(e){}
-    }
-
-    function ensureCalcValExists(){
-      if(!calcResultEl) return;
-      if(!calcValEl()){
-        const dict = (typeof i18n !== 'undefined' ? (i18n[currentLang] || i18n[defaultLang]) : null);
-        const prefix = dict && dict['calc.result'] ? dict['calc.result'] : 'Ընդհանուր արժեք՝';
-        calcResultEl.innerHTML = `${prefix} <strong id="calcVal">—</strong>`;
-      }
-    }
-    ensureCalcValExists();
-
-    if(calcResultEl && window.MutationObserver){
-      const mo = new MutationObserver((mutations)=>{
-        ensureCalcValExists();
-      });
-      mo.observe(calcResultEl, {childList:true, subtree:true, characterData:true});
-    }
-
-function computeEstimate(){
-  if(!areaInput || !serviceSel || !calcValEl()) return;
-  const area = Math.max(0, Number(areaInput.value) || 0);
-  const type = serviceSel.value || 'build';
-  let rateAMD = 180000;   
-  if(type === 'reno') rateAMD = 120000;  
-  if(type === 'full') rateAMD = 250000;   
-
-  const totalAMD = Math.round(area * rateAMD);
-  const USD_RATE = 410;
-  const RUB_RATE = 4.5;
-
-  const totalUSD = totalAMD ? (totalAMD / USD_RATE).toFixed(2) : '0.00';
-  const totalRUB = totalAMD ? Math.round(totalAMD / RUB_RATE) : 0;
-
-  window.autobuild_last_quote = {
-    area,
-    type,
-    rateAMD,
-    totalAMD,
-    totalUSD,
-    totalRUB,
-    ts: Date.now()
-  };
-  try { localStorage.setItem('autobuild_last_quote', JSON.stringify(window.autobuild_last_quote)); } catch(e){}
-
-  const valHtml = totalAMD
-    ? `<strong>${totalAMD.toLocaleString()} AMD</strong><br><span style="color:var(--muted)">${totalUSD} USD • ${totalRUB.toLocaleString()} RUB</span>`
-    : '—';
-
-  ensureCalcValExists();
-  const valNode = calcValEl();
-  const dict = (typeof i18n !== 'undefined') ? (i18n[currentLang] || i18n[defaultLang]) : null;
-  const saveLabel = (dict && dict['calc.save']) ? dict['calc.save'] : 'Save estimate';
-  const detailsLabel = (dict && dict['calc.details']) ? dict['calc.details'] : 'Details';
-
-  if(valNode) {
-    valNode.innerHTML = totalAMD ? `${totalAMD.toLocaleString()} AMD` : '—';
-    calcResultEl.querySelector('.__calc_extra')?.remove();
-    calcResultEl.querySelector('.__calc_actions')?.remove();
-
-    const small = document.createElement('div');
-    small.className = '__calc_extra';
-    small.style.color = 'var(--muted)';
-    small.style.marginTop = '6px';
-    small.innerHTML = `${totalUSD} USD • ${totalRUB.toLocaleString()} RUB`;
-    calcResultEl.appendChild(small);
-
-    const actions = document.createElement('div');
-    actions.className = '__calc_actions';
-    actions.style.marginTop = '10px';
-    actions.style.display = 'flex';
-    actions.style.gap = '8px';
-    actions.style.alignItems = 'center';
-
-    const saveBtn = document.createElement('button');
-    saveBtn.type = 'button';
-    saveBtn.textContent = saveLabel;
-    saveBtn.style.padding = '8px 12px';
-    saveBtn.style.borderRadius = '8px';
-    saveBtn.style.border = '0';
-    saveBtn.style.background = 'var(--primary)';
-    saveBtn.style.color = '#fff';
-    saveBtn.style.cursor = 'pointer';
-    saveBtn.onclick = ()=> {
-      try{
-        const raw = localStorage.getItem('autobuild_saved_quotes') || '[]';
-        const arr = JSON.parse(raw);
-        arr.push(window.autobuild_last_quote);
-        localStorage.setItem('autobuild_saved_quotes', JSON.stringify(arr));
-        saveBtn.textContent = (dict && dict['calc.save'] ? dict['calc.save'] : saveLabel) + ' ✓';
-        saveBtn.disabled = true;
-        setTimeout(()=> { saveBtn.textContent = saveLabel; saveBtn.disabled = false; }, 2000);
-      }catch(err){
-        console.error('save quote err', err);
-        saveBtn.textContent = (dict && dict['calc.save']) ? dict['calc.save'] : saveLabel;
-        saveBtn.style.background = 'crimson';
-        setTimeout(()=> { saveBtn.textContent = saveLabel; saveBtn.style.background = 'var(--primary)'; }, 2000);
-      }
-    };
-
-    const existingDetails = document.getElementById('openContactFromCalc');
-    let detailsBtn;
-    if(existingDetails){
-      detailsBtn = existingDetails;
-      detailsBtn.textContent = detailsLabel;
-    } else {
-      detailsBtn = document.createElement('button');
-      detailsBtn.id = 'openContactFromCalc';
-      detailsBtn.type = 'button';
-      detailsBtn.textContent = detailsLabel;
-      detailsBtn.style.padding = '8px 12px';
-      detailsBtn.style.borderRadius = '8px';
-      detailsBtn.style.border = '1px solid #eef2f7';
-      detailsBtn.style.background = '#fff';
-      detailsBtn.style.color = 'var(--primary)';
-      detailsBtn.style.cursor = 'pointer';
-    }
-
-    detailsBtn.onclick = (e)=> {
-      e.preventDefault();
-      const q = window.autobuild_last_quote || JSON.parse(localStorage.getItem('autobuild_last_quote') || 'null');
-      try { showPage('contact'); } catch(err){}
-      setTimeout(()=> {
-        const cfMsg = document.getElementById('cfMsg');
-        const cfName = document.getElementById('cfName');
-        if(cfMsg){
-          const areaTxt = q ? q.area + ' մ²' : (area + ' մ²');
-          const typeKey = (q && q.type) || type;
-          const typeLabel = (typeKey === 'reno') ? ((dict && dict['service.reno']) || 'Renovation') : (typeKey === 'full' ? ((dict && dict['service.full']) || 'Design+Build') : ((dict && dict['service.build']) || 'Build'));
-          const totalTxt = q ? (q.totalAMD.toLocaleString() + ' AMD') : (totalAMD.toLocaleString() + ' AMD');
-          const msgIntro = dict ? (dict['contact.form.msg.ph'] || '') : '';
-          cfMsg.value = `${msgIntro}\n\n${typeLabel}\n${areaTxt}\n${totalTxt}\n`;
-        }
-        if(cfName) cfName.focus();
-      }, 250);
-    };
-
-    actions.appendChild(saveBtn);
-    actions.appendChild(detailsBtn);
-    calcResultEl.appendChild(actions);
-  }
-}
-
-    if(calcBtn){
-      calcBtn.addEventListener('click', (e)=>{
-        e.preventDefault();
-        computeEstimate();
-      });
-    } else {
-      [areaInput, serviceSel].forEach(el=>{
-        if(!el) return;
-        el.addEventListener('input', ()=> { computeEstimate(); });
-      });
-    }
-
-    
-    document.querySelectorAll('.lang-btn').forEach(b=>{
-      b.addEventListener('click', ()=> {
-        setTimeout(()=>{
-          ensureCalcValExists();
-          computeEstimate();
-        }, 90);
-      });
-    });
-
-    setTimeout(()=> { ensureCalcValExists(); computeEstimate(); }, 120);
-
-  }); 
-})(); 
-
-</script>
-
+  
 </body>
 </html>
 
